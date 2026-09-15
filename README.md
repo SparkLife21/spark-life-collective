@@ -49,7 +49,16 @@ If a path 404s, confirm `.htaccess` is in `/collective` and that Apache `mod_rew
 
 ## Homepage
 
-The homepage is a pixel-close implementation of the supplied design mock. Content in those sections is mock copy (including sample retreats, stats, and extra nav items) so the layout can be reviewed. Swap photography in `public/images/homepage/` — each usage is marked with a TODO.
+The homepage is hand-authored static HTML, not a React page:
+
+- `homepage/index.html` — markup and CSS
+- `homepage/assets/` — its photography and logo
+
+`npm run build` runs `next build` for the other routes, then `scripts/apply-homepage.mjs` copies that file over `out/index.html` and adds `out/assets/`. Edit `homepage/index.html` to change the homepage.
+
+`npm run dev` still renders the older React homepage at `/`. To preview what actually ships, run `npm run build && npm run preview`.
+
+Icons come from `app/icon.png`, `app/apple-icon.png`, and `public/favicon.ico` (16/32/48/64) — all the cream tile with the gold flame.
 
 ## Fonts
 
