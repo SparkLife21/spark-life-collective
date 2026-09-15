@@ -2,27 +2,33 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useId, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Logo } from "@/components/Logo";
 import { cn } from "@/lib/cn";
 import { nav, site } from "@/lib/site";
 
 export function Header() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
-  const menuId = useId();
+  const detailsRef = useRef<HTMLDetailsElement>(null);
 
   useEffect(() => {
-    if (!open) return;
+    detailsRef.current?.removeAttribute("open");
+  }, [pathname]);
+
+  useEffect(() => {
     function onKey(event: KeyboardEvent) {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") detailsRef.current?.removeAttribute("open");
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [open]);
+  }, []);
+
+  function closeMenu() {
+    detailsRef.current?.removeAttribute("open");
+  }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-gold/20 bg-navy/95 backdrop-blur-md">
+    <header className="relative sticky top-0 z-40 border-b border-gold/20 bg-navy/95 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <Link href="/" className="rounded-sm" aria-label={`${site.name} home`}>
           <Logo variant="light" priority />
@@ -55,56 +61,42 @@ export function Header() {
           </Link>
         </nav>
 
-        <button
-          type="button"
-          className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm border border-gold/40 lg:hidden"
-          aria-expanded={open}
-          aria-controls={menuId}
-          onClick={() => setOpen((value) => !value)}
-        >
-          <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
-          <span className="flex flex-col gap-1.5" aria-hidden="true">
-            <span
-              className={cn(
-                "block h-px w-5 bg-gold-light transition-transform",
-                open && "translate-y-1 rotate-45",
-              )}
-            />
-            <span className={cn("block h-px w-5 bg-gold-light", open && "opacity-0")} />
-            <span
-              className={cn(
-                "block h-px w-5 bg-gold-light transition-transform",
-                open && "-translate-y-1.5 -rotate-45",
-              )}
-            />
-          </span>
-        </button>
-      </div>
-
-      <div
-        id={menuId}
-        hidden={!open}
-        className="border-t border-gold/20 bg-navy lg:hidden"
-      >
-        <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-4" aria-label="Mobile">
-          {[...nav.primary, { href: "/give", label: "Give" }].map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              className="rounded-sm px-2 py-3 text-base font-medium text-paper hover:bg-white/5"
-            >
-              {item.label}
-            </Link>
-          ))}
-          <Link
-            href="/retreats/root-and-rise"
-            onClick={() => setOpen(false)}
-            className="mt-2 inline-flex min-h-12 items-center justify-center rounded-sm bg-gold px-4 font-semibold text-navy"
+        <details ref={detailsRef} className="group lg:hidden">
+          <summary className="block cursor-pointer list-none marker:content-none [&::-webkit-details-marker]:hidden">
+            <span className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm border border-gold/40">
+              <span className="sr-only">Menu</span>
+              <span className="flex flex-col gap-1.5" aria-hidden="true">
+                <span className="block h-px w-5 bg-gold-light transition-transform group-open:translate-y-1 group-open:rotate-45" />
+                <span className="block h-px w-5 bg-gold-light group-open:opacity-0" />
+                <span className="block h-px w-5 bg-gold-light transition-transform group-open:-translate-y-1.5 group-open:-rotate-45" />
+              </span>
+            </span>
+          </summary>
+          <nav
+            className="absolute inset-x-0 top-full z-50 border-b border-gold/20 bg-navy px-4 py-4 shadow-lg sm:px-6"
+            aria-label="Mobile"
           >
-            Join Root &amp; Rise
-          </Link>
-        </nav>
+            <div className="mx-auto flex max-w-6xl flex-col gap-1">
+              {[...nav.primary, { href: "/give", label: "Give" }].map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={closeMenu}
+                  className="rounded-sm px-2 py-3 text-base font-medium text-paper hover:bg-white/5"
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <Link
+                href="/retreats/root-and-rise"
+                onClick={closeMenu}
+                className="mt-2 inline-flex min-h-12 items-center justify-center rounded-sm bg-gold px-4 font-semibold text-navy"
+              >
+                Join Root &amp; Rise
+              </Link>
+            </div>
+          </nav>
+        </details>
       </div>
     </header>
   );
