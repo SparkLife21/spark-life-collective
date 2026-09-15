@@ -5,9 +5,9 @@
 #   IONOS_SFTP_HOST      from IONOS SFTP details (often access….webspace-data.io)
 #   IONOS_SFTP_USER      SFTP username for the /collective account
 #   IONOS_SFTP_PASSWORD  that password
-# Repo variable:
-#   NEXT_PUBLIC_SITE_URL     live https:// domain
-# Optional variable:
+# Optional variables:
+#   NEXT_PUBLIC_SITE_URL     live https:// domain. Falls back to the SITE_URL
+#                            default below; set the variable to publish elsewhere.
 #   IONOS_SFTP_REMOTE_DIR    normally unset — the deploy script detects whether
 #                            the SFTP account already lands in /collective.
 #                            Set "." or a folder name to override.
@@ -27,6 +27,10 @@ concurrency:
 
 permissions:
   contents: read
+
+env:
+  # Repository variable NEXT_PUBLIC_SITE_URL wins when it is set.
+  SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL || 'https://www.sparklifecollective.org' }}
 
 jobs:
   deploy:
@@ -57,20 +61,20 @@ jobs:
 
       - run: npm ci
 
-      - name: Check public site URL
+      - name: Report the public site URL
         env:
-          SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
+          SITE_URL_VAR: ${{ vars.NEXT_PUBLIC_SITE_URL }}
         run: |
-          if [ -z "$SITE_URL" ]; then
-            echo "Set repository variable NEXT_PUBLIC_SITE_URL to the live domain."
-            echo "Without it, sitemap.xml and robots.txt point at http://localhost:3000."
-            echo "https://github.com/${GITHUB_REPOSITORY}/settings/variables/actions"
-            exit 1
+          if [ -n "$SITE_URL_VAR" ]; then
+            echo "Building for $SITE_URL (repository variable NEXT_PUBLIC_SITE_URL)."
+          else
+            echo "Building for $SITE_URL (workflow default)."
+            echo "Set repository variable NEXT_PUBLIC_SITE_URL to publish a different domain."
           fi
 
       - run: npm run build
         env:
-          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
+          NEXT_PUBLIC_SITE_URL: ${{ env.SITE_URL }}
 
       - name: Confirm export
         run: |
@@ -89,8 +93,6 @@ jobs:
         run: bash scripts/deploy-ionos.sh
 
       - name: Confirm the live site serves this build
-        env:
-          SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
         run: |
           url="${SITE_URL%/}/sitemap.xml"
           for attempt in 1 2 3 4 5; do
