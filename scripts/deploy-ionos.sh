@@ -1,12 +1,17 @@
 #!/usr/bin/env bash
 # Upload ./out to IONOS over SFTP (GitHub Actions → hosting).
-# Default remote directory is collective (webspace /collective).
 # Required: IONOS_SFTP_HOST IONOS_SFTP_USER IONOS_SFTP_PASSWORD
-# Optional: IONOS_SFTP_REMOTE_DIR (default collective)  IONOS_SFTP_PORT (default 22)
+# Optional: IONOS_SFTP_REMOTE_DIR  IONOS_SFTP_PORT (default 22)
+#
+# Leave IONOS_SFTP_REMOTE_DIR unset and the target is detected: if the SFTP
+# account already lands in the site folder, files go there instead of into a
+# nested collective/ that the domain does not serve.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
+
+SITE_DIR_NAME="collective"
 
 trim() {
   local s="$1"
@@ -37,8 +42,7 @@ normalize_host() {
 HOST="$(normalize_host "${IONOS_SFTP_HOST:-}")"
 USER="$(trim "${IONOS_SFTP_USER:-}")"
 PASS="$(trim "${IONOS_SFTP_PASSWORD:-}")"
-REMOTE="$(trim "${IONOS_SFTP_REMOTE_DIR:-collective}")"
-[[ -z "$REMOTE" ]] && REMOTE="collective"
+REMOTE="$(trim "${IONOS_SFTP_REMOTE_DIR:-}")"
 PORT="${IONOS_SFTP_PORT:-${PORT:-22}}"
 
 if [[ -z "$HOST" || -z "$USER" || -z "$PASS" ]]; then
@@ -61,6 +65,33 @@ fi
 if ! command -v sshpass >/dev/null || ! command -v sftp >/dev/null; then
   echo "Need sshpass and sftp (openssh-client) on PATH." >&2
   exit 1
+fi
+
+export SSHPASS="$PASS"
+
+sftp_session() {
+  # Interactive stdin (not -b): IONOS SFTP errors on mkdir-if-exists, which
+  # would abort a batch run.
+  sshpass -e sftp -oBatchMode=no -oStrictHostKeyChecking=accept-new \
+    -P "$PORT" "$USER@$HOST"
+}
+
+remote_home() {
+  printf 'pwd\nbye\n' | sftp_session 2>/dev/null |
+    sed -n 's/.*Remote working directory: *//p' | tail -1 | tr -d '\r'
+}
+
+if [[ -z "$REMOTE" ]]; then
+  home="$(remote_home || true)"
+  home="${home%/}"
+  if [[ -n "$home" && "${home##*/}" == "$SITE_DIR_NAME" ]]; then
+    # Already inside the folder the domain serves.
+    REMOTE="."
+    echo "SFTP account lands in ${home}; uploading there."
+  else
+    REMOTE="$SITE_DIR_NAME"
+    echo "SFTP account lands in ${home:-/}; uploading into ${REMOTE}/."
+  fi
 fi
 
 batch="$(mktemp)"
@@ -86,8 +117,6 @@ trap 'rm -f "$batch"' EXIT
   printf 'bye\n'
 } >"$batch"
 
-export SSHPASS="$PASS"
-# Interactive stdin (not -b): IONOS SFTP often errors on mkdir-if-exists and would abort a batch.
-sshpass -e sftp -oBatchMode=no -oStrictHostKeyChecking=accept-new -P "$PORT" "$USER@$HOST" <"$batch"
+sftp_session <"$batch"
 
 echo "Uploaded out/ to IONOS ${REMOTE} over SFTP."
