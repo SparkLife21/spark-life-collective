@@ -30,15 +30,12 @@ Secrets (from IONOS → Hosting → SFTP & SSH — the account for `/collective`
 | `IONOS_SFTP_USER` | SFTP username |
 | `IONOS_SFTP_PASSWORD` | SFTP password |
 
-Variables:
+No variables are required. Two optional ones:
 
-| Variable | Value |
+| Variable | Effect |
 | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | Live URL, e.g. `https://your-domain.com` |
-
-Leave `IONOS_SFTP_REMOTE_DIR` unset. The deploy script checks where the SFTP account lands: if it is already inside `/collective`, files go straight there; otherwise they go into a `collective/` folder. Set the variable only to force a specific folder.
-
-`NEXT_PUBLIC_SITE_URL` is required. Without it `sitemap.xml` and `robots.txt` are built pointing at `http://localhost:3000`.
+| `NEXT_PUBLIC_SITE_URL` | Canonical URLs, `sitemap.xml`, and `robots.txt`. Defaults to the domain set in the workflow. |
+| `IONOS_SFTP_REMOTE_DIR` | Forces an upload folder. Leave unset — the deploy script checks where the SFTP account lands and, if it is already inside `/collective`, uploads straight there instead of nesting another folder. |
 
 ### 2. Ship
 
