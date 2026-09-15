@@ -1,0 +1,77 @@
+# GitHub → IONOS regular web hosting.
+# Builds the static export and uploads it over SFTP into /collective.
+#
+# Repo secrets (Settings → Secrets and variables → Actions):
+#   IONOS_SFTP_HOST      from IONOS SFTP details (often access….webspace-data.io)
+#   IONOS_SFTP_USER      SFTP username for the /collective account
+#   IONOS_SFTP_PASSWORD  that password
+# Repo variable:
+#   NEXT_PUBLIC_SITE_URL     live https:// domain
+# Optional variable:
+#   IONOS_SFTP_REMOTE_DIR    default "collective". Set to "." if this SFTP user
+#                            is already jailed to /collective.
+
+name: Deploy to IONOS
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ionos-production
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Check IONOS SFTP secrets
+        env:
+          HOST: ${{ secrets.IONOS_SFTP_HOST }}
+          USER: ${{ secrets.IONOS_SFTP_USER }}
+          PASS: ${{ secrets.IONOS_SFTP_PASSWORD }}
+        run: |
+          missing=0
+          [ -n "$HOST" ] || { echo "Missing secret IONOS_SFTP_HOST"; missing=1; }
+          [ -n "$USER" ] || { echo "Missing secret IONOS_SFTP_USER"; missing=1; }
+          [ -n "$PASS" ] || { echo "Missing secret IONOS_SFTP_PASSWORD"; missing=1; }
+          if [ "$missing" -ne 0 ]; then
+            echo "Add the IONOS SFTP host, user, and password as GitHub Actions secrets:"
+            echo "https://github.com/${GITHUB_REPOSITORY}/settings/secrets/actions"
+            exit 1
+          fi
+
+      - run: npm ci
+
+      - run: npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
+
+      - name: Confirm export
+        run: |
+          test -f out/index.html
+          test -f out/.htaccess
+
+      - name: Install SFTP client
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+
+      - name: Upload out/ to IONOS /collective
+        env:
+          IONOS_SFTP_HOST: ${{ secrets.IONOS_SFTP_HOST }}
+          IONOS_SFTP_USER: ${{ secrets.IONOS_SFTP_USER }}
+          IONOS_SFTP_PASSWORD: ${{ secrets.IONOS_SFTP_PASSWORD }}
+          IONOS_SFTP_REMOTE_DIR: ${{ vars.IONOS_SFTP_REMOTE_DIR }}
+        run: |
+          export IONOS_SFTP_REMOTE_DIR="${IONOS_SFTP_REMOTE_DIR:-collective}"
+          bash scripts/deploy-ionos.sh

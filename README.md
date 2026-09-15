@@ -2,7 +2,7 @@
 
 Public website for **Spark Life Collective (SLC)** — a 501(c)(3) nonprofit ministry, established 2024. SLC is a separate legal entity from Spark Life (SparkLifeToday.com).
 
-Stack: **Next.js (App Router) + TypeScript + Tailwind CSS**. The production build is a **static export** for **IONOS regular web hosting** (upload the `out/` folder over FTP — no Node server).
+Stack: **Next.js (App Router) + TypeScript + Tailwind CSS**. The production build is a **static export**. GitHub Actions uploads it to **IONOS regular web hosting** (`/collective`) over SFTP — no Node server on IONOS.
 
 ## Local development
 
@@ -14,31 +14,39 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-## Deploy to IONOS (regular web hosting)
+## Deploy: GitHub → IONOS
 
-This host serves HTML/CSS/JS. It cannot run `next start`. Build a static site, then upload it.
+IONOS serves the static files. It cannot run `next start`. GitHub builds the site and uploads **`out/`** over SFTP into webspace folder **`/collective`**.
 
-1. Set the public URL (used in sitemap, robots, and Open Graph):
+### 1. Connect GitHub to IONOS
 
-   ```bash
-   echo "NEXT_PUBLIC_SITE_URL=https://your-domain.com" >> .env.local
-   ```
+In the repo: **Settings → Secrets and variables → Actions**.
 
-2. Build:
+Secrets (from IONOS → Hosting → SFTP & SSH — the account for `/collective`):
 
-   ```bash
-   npm run build
-   ```
+| Secret | Value |
+| --- | --- |
+| `IONOS_SFTP_HOST` | Host such as `access….webspace-data.io` |
+| `IONOS_SFTP_USER` | SFTP username |
+| `IONOS_SFTP_PASSWORD` | SFTP password |
 
-   That writes static files to **`out/`**.
+Variables:
 
-3. In IONOS File Manager or FTP, open the web root (usually **`htdocs`** or **`httpdocs`**).
+| Variable | Value |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Live URL, e.g. `https://your-domain.com` |
 
-4. Upload **the contents of `out/`** (not the `out` folder itself) into that web root. Include `.htaccess` — it is generated from `public/.htaccess`.
+Leave `IONOS_SFTP_REMOTE_DIR` unset so uploads go to `collective`. If this SFTP user is already locked to `/collective`, set that variable to `.`.
 
-5. Visit the domain. `/about/` and other routes should load without a Node process.
+### 2. Ship
 
-If a path 404s, confirm `.htaccess` uploaded and that IONOS Apache `mod_rewrite` is on (it usually is). SSL is turned on in the IONOS panel, not in this repo.
+Merge to **`main`**, or run **Actions → Deploy to IONOS → Run workflow**. GitHub runs `npm run build` and uploads the files, including `.htaccess`.
+
+### 3. Point the domain at `/collective`
+
+In IONOS: **Domains** → connect the domain to webspace directory **`/collective`**, then turn on SSL. Visit the domain — `/about/` and other routes should load without a Node process.
+
+If a path 404s, confirm `.htaccess` is in `/collective` and that Apache `mod_rewrite` is on (it usually is).
 
 ## Homepage
 
