@@ -8,15 +8,48 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
-HOST="${IONOS_SFTP_HOST:-}"
-USER="${IONOS_SFTP_USER:-}"
-PASS="${IONOS_SFTP_PASSWORD:-}"
-REMOTE="${IONOS_SFTP_REMOTE_DIR:-collective}"
-PORT="${IONOS_SFTP_PORT:-22}"
+trim() {
+  local s="$1"
+  s="${s#"${s%%[![:space:]]*}"}"
+  s="${s%"${s##*[![:space:]]}"}"
+  printf '%s' "$s"
+}
+
+# FileZilla / IONOS values are often copied as sftp://host or host:22.
+normalize_host() {
+  local h
+  h="$(trim "$1")"
+  h="${h#sftp://}"
+  h="${h#ftps://}"
+  h="${h#ftp://}"
+  h="${h#ssh://}"
+  if [[ "$h" == *@* ]]; then
+    h="${h##*@}"
+  fi
+  h="${h%%/*}"
+  if [[ "$h" == *:* && "${h##*:}" =~ ^[0-9]+$ ]]; then
+    PORT="${h##*:}"
+    h="${h%%:*}"
+  fi
+  printf '%s' "$h"
+}
+
+HOST="$(normalize_host "${IONOS_SFTP_HOST:-}")"
+USER="$(trim "${IONOS_SFTP_USER:-}")"
+PASS="$(trim "${IONOS_SFTP_PASSWORD:-}")"
+REMOTE="$(trim "${IONOS_SFTP_REMOTE_DIR:-collective}")"
+[[ -z "$REMOTE" ]] && REMOTE="collective"
+PORT="${IONOS_SFTP_PORT:-${PORT:-22}}"
 
 if [[ -z "$HOST" || -z "$USER" || -z "$PASS" ]]; then
   echo "Missing IONOS_SFTP_HOST, IONOS_SFTP_USER, or IONOS_SFTP_PASSWORD." >&2
   echo "Add them as GitHub Actions secrets, then re-run Deploy to IONOS." >&2
+  exit 1
+fi
+
+if [[ "$HOST" == "sftp" || "$HOST" == "ftp" || "$HOST" == "ftps" || "$HOST" != *.* ]]; then
+  echo "IONOS_SFTP_HOST must be the server hostname from IONOS (example: access123456789.webspace-data.io)." >&2
+  echo "Do not use the protocol word 'sftp'. A leading sftp:// is stripped automatically." >&2
   exit 1
 fi
 

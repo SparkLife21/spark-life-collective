@@ -26,7 +26,7 @@ Secrets (from IONOS → Hosting → SFTP & SSH — the account for `/collective`
 
 | Secret | Value |
 | --- | --- |
-| `IONOS_SFTP_HOST` | Host such as `access….webspace-data.io` |
+| `IONOS_SFTP_HOST` | Server name only, e.g. `access….webspace-data.io` (a leading `sftp://` is stripped) |
 | `IONOS_SFTP_USER` | SFTP username |
 | `IONOS_SFTP_PASSWORD` | SFTP password |
 
