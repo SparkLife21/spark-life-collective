@@ -5,9 +5,15 @@
  * Components read these helpers and render the live embed/link instead of the placeholder.
  */
 
+const DEFAULT_JOTFORM_ROOT_AND_RISE =
+  "https://form.jotform.com/sparklife21/slc-retreat-root-rise";
+
 export function jotformRootAndRiseUrl() {
   // JOTFORM EMBED: Root & Rise registration
-  return process.env.NEXT_PUBLIC_JOTFORM_ROOT_AND_RISE_URL?.trim() || "";
+  return (
+    process.env.NEXT_PUBLIC_JOTFORM_ROOT_AND_RISE_URL?.trim() ||
+    DEFAULT_JOTFORM_ROOT_AND_RISE
+  );
 }
 
 export function donateUrl() {

@@ -1,22 +1,28 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Source_Sans_3 } from "next/font/google";
+import { Cinzel, Outfit, Yellowtail } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { getSiteUrl, site } from "@/lib/site";
 import "./globals.css";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const holla = Yellowtail({
+  variable: "--font-holla",
   subsets: ["latin"],
+  weight: "400",
   display: "swap",
-  axes: ["SOFT", "WONK", "opsz"],
 });
 
-const sourceSans = Source_Sans_3({
-  variable: "--font-source-sans",
+const mango = Cinzel({
+  variable: "--font-mango",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const agrandir = Outfit({
+  variable: "--font-agrandir",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -49,7 +55,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#9B3636",
+  themeColor: "#023550",
   width: "device-width",
   initialScale: 1,
 };
@@ -58,9 +64,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${sourceSans.variable} h-full scroll-smooth antialiased`}
+      className={`${holla.variable} ${mango.variable} ${agrandir.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="texture-paper flex min-h-full flex-col font-sans text-ink">
+      <body className="flex min-h-full flex-col bg-navy font-sans text-paper">
         <a href="#main" className="skip-link">
           Skip to content
         </a>

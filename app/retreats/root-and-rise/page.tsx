@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { ButtonLink } from "@/components/ButtonLink";
 import { DonateEmbed } from "@/components/DonateEmbed";
-import { HorizonScene } from "@/components/HorizonScene";
 import { RegistrationEmbed } from "@/components/RegistrationEmbed";
+import { RetreatFlyer } from "@/components/RetreatFlyer";
 import { Section } from "@/components/Section";
+import { Sunburst } from "@/components/Sunburst";
 import { ConfirmNote, DraftNote } from "@/components/StatusNotes";
 import { pageMetadata } from "@/lib/metadata";
 import { copy, getSiteUrl, rootAndRise } from "@/lib/site";
@@ -11,7 +12,7 @@ import { copy, getSiteUrl, rootAndRise } from "@/lib/site";
 export const metadata: Metadata = pageMetadata({
   title: "Root & Rise",
   description:
-    "Root & Rise is a free two-day virtual retreat, October 6–7, 2026. Anchored faith through hardship. A sacred reset.",
+    "Root & Rise is a free two-day virtual retreat, October 14–15, 2026, 1–2 PM ET. Anchored faith through hardship. A sacred reset. Limited space.",
   path: "/retreats/root-and-rise",
 });
 
@@ -20,7 +21,7 @@ const faqs = [
     question: "How do I join on Zoom?",
     answer: (
       <>
-        Register below.{" "}
+        Register below and you will receive Zoom details.{" "}
         <ConfirmNote>
           [CONFIRM: how and when the Zoom link is sent after registration]
         </ConfirmNote>
@@ -33,7 +34,7 @@ const faqs = [
       <>
         The gathering is live at {rootAndRise.timeLabel}. Join at the time that
         matches your zone. If you live outside these zones, convert from Eastern
-        Time (1:00 PM ET).
+        Time ({rootAndRise.timeEt}).
       </>
     ),
   },
@@ -67,6 +68,7 @@ export default function RootAndRisePage() {
     endDate: `${rootAndRise.endDate}T14:00:00-04:00`,
     eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
     eventStatus: "https://schema.org/EventScheduled",
+    image: `${getSiteUrl()}${rootAndRise.flyerSrc}`,
     location: {
       "@type": "VirtualLocation",
       url: `${getSiteUrl()}${rootAndRise.href}`,
@@ -77,6 +79,13 @@ export default function RootAndRisePage() {
       url: getSiteUrl(),
     },
     isAccessibleForFree: true,
+    offers: {
+      "@type": "Offer",
+      price: 0,
+      priceCurrency: "USD",
+      url: rootAndRise.registerUrl,
+      availability: "https://schema.org/LimitedAvailability",
+    },
   };
 
   return (
@@ -86,51 +95,68 @@ export default function RootAndRisePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <section className="hero-glow relative isolate overflow-hidden text-paper">
-        <HorizonScene />
-        <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
-          <p className="eyebrow text-gold-light">
-            {rootAndRise.aspects.join(" + ")}
-          </p>
-          <h1 className="mt-4 font-serif text-4xl font-light tracking-tight sm:text-6xl">
-            {rootAndRise.name}
-          </h1>
-          <p className="mt-5 max-w-2xl font-serif text-2xl italic text-gold-light">
-            {rootAndRise.theme}
-          </p>
-          <p className="mt-8 text-sm tracking-wide text-paper/80">
-            Scripture · {rootAndRise.scriptureReference}
-          </p>
-          <p className="mt-2 max-w-xl text-sm text-paper/55">
-            Full verse text will be added when Spark Life supplies the
-            translation they want used.
-          </p>
+      <section className="relative isolate overflow-hidden border-b border-gold/20 bg-navy">
+        <Sunburst className="right-[-10rem] top-[-8rem] h-[40rem] w-[40rem] opacity-70" />
+        <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:py-16">
+          <div className="overflow-hidden rounded-sm border border-gold/25">
+            <RetreatFlyer priority />
+          </div>
+          <div>
+            <p className="eyebrow text-gold-light">
+              {rootAndRise.aspects.join(" + ")}
+            </p>
+            <h1 className="mt-4 font-serif text-5xl font-normal leading-[0.95] tracking-tight text-paper sm:text-7xl">
+              Root{" "}
+              <span className="font-script text-gold" aria-hidden="true">
+                &amp;
+              </span>{" "}
+              Rise
+            </h1>
+            <p className="mt-6 max-w-xl font-serif text-2xl italic text-paper/85">
+              {rootAndRise.theme}
+            </p>
+            <p className="mt-6 text-lg font-semibold text-gold">
+              {rootAndRise.datesFlyer} · {rootAndRise.timeEt}
+            </p>
+            <p className="mt-1 font-serif text-base text-gold-light">
+              Free virtual retreat · {rootAndRise.limitedSpace}
+            </p>
+            <p className="mt-6 text-sm tracking-wide text-paper/70">
+              Scripture · {rootAndRise.scriptureReference}
+            </p>
+            <p className="mt-2 max-w-xl text-sm text-paper/50">
+              Full verse text will be added when Spark Life supplies the
+              translation they want used.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <ButtonLink href="#register">Register free</ButtonLink>
+              <ButtonLink href="/give" variant="secondary">
+                Give
+              </ButtonLink>
+            </div>
+          </div>
         </div>
       </section>
 
       <Section>
-        <dl className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <dl className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
           {[
             { label: "Format", value: rootAndRise.format },
             { label: "Dates", value: rootAndRise.datesLabel },
             {
               label: "Time",
-              lines: [
-                "1:00 PM ET",
-                "12:00 PM CT",
-                "11:00 AM MT",
-                "10:00 AM PT",
-              ],
+              lines: [...rootAndRise.timeLines],
             },
             {
               label: "Cost",
               value: rootAndRise.cost,
               href: "#giving",
             },
+            { label: "Space", value: rootAndRise.limitedSpace },
           ].map((item) => (
-            <div key={item.label} className="border-t border-ink/15 pt-4">
-              <dt className="eyebrow text-primary">{item.label}</dt>
-              <dd className="mt-2 text-sm leading-relaxed text-ink/85">
+            <div key={item.label} className="border-t border-gold/25 pt-4">
+              <dt className="eyebrow text-gold-light">{item.label}</dt>
+              <dd className="mt-2 text-sm leading-relaxed text-paper/85">
                 {"lines" in item && item.lines ? (
                   <ul className="space-y-1">
                     {item.lines.map((line) => (
@@ -138,7 +164,10 @@ export default function RootAndRisePage() {
                     ))}
                   </ul>
                 ) : "href" in item && item.href ? (
-                  <a href={item.href} className="underline decoration-gold underline-offset-4">
+                  <a
+                    href={item.href}
+                    className="underline decoration-gold underline-offset-4"
+                  >
                     {item.value}
                   </a>
                 ) : (
@@ -152,9 +181,11 @@ export default function RootAndRisePage() {
 
       <Section className="pt-0">
         <div className="mx-auto max-w-3xl">
-          <h2 className="font-serif text-3xl font-light">What to expect</h2>
+          <h2 className="font-serif text-3xl font-normal text-paper">
+            What to expect
+          </h2>
           <DraftNote className="mt-5">
-            <p className="text-lg leading-relaxed text-ink/85">
+            <p className="text-lg leading-relaxed text-paper/85">
               {copy.rootAndRiseExpect.text}
             </p>
           </DraftNote>
@@ -163,9 +194,10 @@ export default function RootAndRisePage() {
 
       <Section className="pt-0">
         <div className="mx-auto max-w-3xl">
-          <h2 className="font-serif text-3xl font-light">Facilitators</h2>
-          <p className="mt-2 text-sm text-ink/60">
-            {/* OPEN DECISION: defaulting to no headshots, consistent with symbolic imagery. */}
+          <h2 className="font-serif text-3xl font-normal text-paper">
+            Facilitators
+          </h2>
+          <p className="mt-2 text-sm text-paper/60">
             Name, role, and bio text only — no photos unless Spark Life asks for
             them here.
           </p>
@@ -173,13 +205,11 @@ export default function RootAndRisePage() {
             {rootAndRise.facilitators.map((person) => (
               <li
                 key={person.name}
-                className="rounded-sm border border-ink/10 bg-white/60 p-6"
+                className="rounded-sm border border-gold/20 bg-navy-deep p-6"
               >
-                <p className="font-serif text-2xl">{person.name}</p>
-                <p className="mt-1 text-sm font-medium text-primary">
-                  {person.role}
-                </p>
-                <p className="mt-4 text-sm text-moss">
+                <p className="font-serif text-2xl text-paper">{person.name}</p>
+                <p className="mt-1 text-sm font-medium text-gold">{person.role}</p>
+                <p className="mt-4 text-sm text-gold-light/80">
                   [FACILITATOR BIOS — insert]
                 </p>
               </li>
@@ -190,10 +220,10 @@ export default function RootAndRisePage() {
 
       <Section className="pt-0" id="register">
         <div className="mx-auto max-w-3xl">
-          <h2 className="font-serif text-3xl font-light">Register</h2>
-          <p className="mt-3 text-ink/75">
-            Root &amp; Rise is free. Registration helps us send you the Zoom
-            details and know who is in the room.
+          <h2 className="font-serif text-3xl font-normal text-paper">Register</h2>
+          <p className="mt-3 text-paper/75">
+            Root &amp; Rise is free. Space is limited. Registration helps us
+            send you the Zoom details and know who is in the room.
           </p>
           <div className="mt-8">
             <RegistrationEmbed />
@@ -203,8 +233,8 @@ export default function RootAndRisePage() {
 
       <Section className="pt-0" id="giving">
         <div className="mx-auto max-w-3xl">
-          <h2 className="font-serif text-3xl font-light">Give</h2>
-          <p className="mt-3 text-lg leading-relaxed text-ink/85">
+          <h2 className="font-serif text-3xl font-normal text-paper">Give</h2>
+          <p className="mt-3 text-lg leading-relaxed text-paper/85">
             The retreat is free. Donations keep it that way — so someone who
             could not pay still has a seat.
           </p>
@@ -221,11 +251,11 @@ export default function RootAndRisePage() {
 
       <Section className="pt-0">
         <div className="mx-auto max-w-3xl">
-          <h2 className="font-serif text-3xl font-light">FAQ</h2>
-          <div className="mt-8 divide-y divide-ink/10 border-y border-ink/10">
+          <h2 className="font-serif text-3xl font-normal text-paper">FAQ</h2>
+          <div className="mt-8 divide-y divide-gold/20 border-y border-gold/20">
             {faqs.map((item) => (
               <details key={item.question} className="group py-5">
-                <summary className="cursor-pointer list-none font-semibold text-ink marker:content-none [&::-webkit-details-marker]:hidden">
+                <summary className="cursor-pointer list-none font-semibold text-paper marker:content-none [&::-webkit-details-marker]:hidden">
                   <span className="flex items-center justify-between gap-4">
                     {item.question}
                     <span
@@ -236,7 +266,7 @@ export default function RootAndRisePage() {
                     </span>
                   </span>
                 </summary>
-                <p className="mt-3 text-ink/80">{item.answer}</p>
+                <p className="mt-3 text-paper/80">{item.answer}</p>
               </details>
             ))}
           </div>

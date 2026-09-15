@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
-import { Mark } from "@/components/Mark";
+import { Logo } from "@/components/Logo";
 import { cn } from "@/lib/cn";
 import { nav, site } from "@/lib/site";
 
@@ -22,22 +22,10 @@ export function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-ink/10 bg-paper/90 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-gold/20 bg-navy/95 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <Link
-          href="/"
-          className="flex items-center gap-3 rounded-sm text-ink"
-          aria-label={`${site.name} home`}
-        >
-          <Mark className="h-10 w-10" />
-          <span className="leading-tight">
-            <span className="block font-serif text-lg tracking-tight sm:text-xl">
-              Spark Life
-            </span>
-            <span className="block font-sans text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-primary">
-              Collective
-            </span>
-          </span>
+        <Link href="/" className="rounded-sm" aria-label={`${site.name} home`}>
+          <Logo variant="light" priority />
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary">
@@ -46,8 +34,8 @@ export function Header() {
               key={item.href}
               href={item.href}
               className={cn(
-                "text-sm font-medium tracking-wide text-ink/80 transition-colors hover:text-primary",
-                pathname === item.href && "text-primary",
+                "text-sm font-medium tracking-wide text-paper/80 transition-colors hover:text-gold",
+                pathname === item.href && "text-gold-light",
               )}
             >
               {item.label}
@@ -55,16 +43,13 @@ export function Header() {
           ))}
           <Link
             href="/give"
-            className={cn(
-              "text-sm font-semibold tracking-wide text-gold hover:text-primary",
-              pathname === "/give" && "text-primary",
-            )}
+            className="text-sm font-semibold tracking-wide text-gold hover:text-gold-light"
           >
             Give
           </Link>
           <Link
             href="/retreats/root-and-rise"
-            className="inline-flex min-h-11 items-center rounded-sm bg-primary px-4 text-sm font-semibold text-white hover:bg-primary-dark"
+            className="inline-flex min-h-11 items-center rounded-sm bg-gold px-4 text-sm font-semibold text-navy hover:bg-gold-light"
           >
             Join Root &amp; Rise
           </Link>
@@ -72,7 +57,7 @@ export function Header() {
 
         <button
           type="button"
-          className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm border border-ink/15 lg:hidden"
+          className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm border border-gold/40 lg:hidden"
           aria-expanded={open}
           aria-controls={menuId}
           onClick={() => setOpen((value) => !value)}
@@ -81,14 +66,14 @@ export function Header() {
           <span className="flex flex-col gap-1.5" aria-hidden="true">
             <span
               className={cn(
-                "block h-px w-5 bg-ink transition-transform",
+                "block h-px w-5 bg-gold-light transition-transform",
                 open && "translate-y-1 rotate-45",
               )}
             />
-            <span className={cn("block h-px w-5 bg-ink", open && "opacity-0")} />
+            <span className={cn("block h-px w-5 bg-gold-light", open && "opacity-0")} />
             <span
               className={cn(
-                "block h-px w-5 bg-ink transition-transform",
+                "block h-px w-5 bg-gold-light transition-transform",
                 open && "-translate-y-1.5 -rotate-45",
               )}
             />
@@ -99,7 +84,7 @@ export function Header() {
       <div
         id={menuId}
         hidden={!open}
-        className="border-t border-ink/10 bg-paper lg:hidden"
+        className="border-t border-gold/20 bg-navy lg:hidden"
       >
         <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-4" aria-label="Mobile">
           {[...nav.primary, { href: "/give", label: "Give" }].map((item) => (
@@ -107,7 +92,7 @@ export function Header() {
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
-              className="rounded-sm px-2 py-3 text-base font-medium text-ink hover:bg-gold-light/20"
+              className="rounded-sm px-2 py-3 text-base font-medium text-paper hover:bg-white/5"
             >
               {item.label}
             </Link>
@@ -115,7 +100,7 @@ export function Header() {
           <Link
             href="/retreats/root-and-rise"
             onClick={() => setOpen(false)}
-            className="mt-2 inline-flex min-h-12 items-center justify-center rounded-sm bg-primary px-4 font-semibold text-white"
+            className="mt-2 inline-flex min-h-12 items-center justify-center rounded-sm bg-gold px-4 font-semibold text-navy"
           >
             Join Root &amp; Rise
           </Link>

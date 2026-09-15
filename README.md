@@ -24,13 +24,23 @@ npm run build
 | Path | Purpose |
 | --- | --- |
 | `/` | Home — launch CTA for Root & Rise |
-| `/retreats/root-and-rise` | Featured retreat, Oct 6–7, 2026 |
+| `/retreats/root-and-rise` | Featured retreat, October 14–15, 2026 |
 | `/give` | Donation explanation + platform swap point |
-| `/about` | Story, mission placeholder, 501(c)(3) |
+| `/about` | Story, F.A.I.T.H. pillars, mission placeholder, 501(c)(3) |
 | `/retreats` | Overview + exploratory retreat concepts |
 | `/contact` | Contact form (inbox TBD) |
 
-Copy marked **Draft copy — not approved** on the site has not been approved by Spark Life. Bracketed `[CONFIRM]` / `[insert]` lines are open items, not final policy.
+Copy marked **Draft copy — not approved** on the site has not been approved by Spark Life. Bracketed `[CONFIRM]` / `[insert]` / `[MISSION STATEMENT — insert approved copy]` lines are open items, not final policy.
+
+## Brand (official kit)
+
+Faith navy `#023550` is the dominant field. Connection gold `#CC9752` is the primary accent and CTA color. Belief cream `#EEEEE9` is for breathing room (form embeds, flyer contrast). Empowerment, Stability, Devotion, Expression, and Exploration are supporting accents — not evenly distributed.
+
+The lockup in `public/images/` is the uploaded SLC mark with the background removed (transparent PNG). Gold wordmark + gold flame for navy fields (`slc-logo-light.png`); original navy wordmark + gold flame for cream (`slc-logo.png`).
+
+Web type stand-ins until licensed files are supplied: **Yellowtail** (Holla/Vincentia script), **Cinzel** (Black Mango / art-deco caps), **Outfit** (Agrandir Tight).
+
+Do not treat the SPARK app mockup in the brand deck as an SLC product until Spark Life confirms it.
 
 ## Integrations (swap points)
 
@@ -39,19 +49,13 @@ Set these in `.env.local` when Spark Life shares them. Until then, labeled place
 | Env var | What it wires |
 | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | Canonical URLs, Open Graph, sitemap |
-| `NEXT_PUBLIC_JOTFORM_ROOT_AND_RISE_URL` | Root & Rise Jotform iframe |
+| `NEXT_PUBLIC_JOTFORM_ROOT_AND_RISE_URL` | Root & Rise Jotform iframe (defaults to the live form) |
 | `NEXT_PUBLIC_DONATE_URL` | Donate button/link |
 | `NEXT_PUBLIC_NEWSLETTER_ACTION_URL` | Email signup form action |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | Contact form `mailto:` |
 | `NEXT_PUBLIC_SOCIAL_LINKS` | `Label\|url,Label\|url` |
 
 Search the repo for `JOTFORM EMBED`, `DONATE EMBED`, and `EMAIL SIGNUP` to find the swap points.
-
-## Design defaults (open decisions)
-
-- **Palette:** dominant `#9B3636`, `#CC9752`, `#ECEEE9`, `#1A1A1A`. Moss / dusk / heather are accent-only.
-- **Imagery:** symbolic only (light, horizon, roots). No human figures. Facilitator photos omitted.
-- **Type:** Fraunces (headings) + Source Sans 3 (body).
 
 ## Deploy
 

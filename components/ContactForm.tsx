@@ -32,44 +32,42 @@ export function ContactForm() {
     setSent(true);
   }
 
+  const fieldClass =
+    "min-h-12 rounded-sm border border-gold/30 bg-white/5 px-3 font-normal text-paper";
+
   return (
     <form onSubmit={onSubmit} className="grid gap-5">
-      <label className="grid gap-1 text-sm font-medium">
+      <label className="grid gap-1 text-sm font-medium text-paper">
         Name
-        <input
-          name="name"
-          required
-          autoComplete="name"
-          className="min-h-12 rounded-sm border border-ink/20 bg-white px-3 font-normal"
-        />
+        <input name="name" required autoComplete="name" className={fieldClass} />
       </label>
-      <label className="grid gap-1 text-sm font-medium">
+      <label className="grid gap-1 text-sm font-medium text-paper">
         Email
         <input
           type="email"
           name="email"
           required
           autoComplete="email"
-          className="min-h-12 rounded-sm border border-ink/20 bg-white px-3 font-normal"
+          className={fieldClass}
         />
       </label>
-      <label className="grid gap-1 text-sm font-medium">
+      <label className="grid gap-1 text-sm font-medium text-paper">
         Message
         <textarea
           name="message"
           required
           rows={6}
-          className="rounded-sm border border-ink/20 bg-white px-3 py-3 font-normal"
+          className="rounded-sm border border-gold/30 bg-white/5 px-3 py-3 font-normal text-paper"
         />
       </label>
       <button
         type="submit"
-        className="inline-flex min-h-12 w-fit items-center rounded-sm bg-primary px-6 font-semibold text-white hover:bg-primary-dark"
+        className="inline-flex min-h-12 w-fit items-center rounded-sm bg-gold px-6 font-semibold text-navy hover:bg-gold-light"
       >
         Send message
       </button>
       {sent ? (
-        <p className="text-sm text-moss">
+        <p className="text-sm text-gold-light">
           Your email app should open with the message addressed to the confirmed
           inbox.
         </p>

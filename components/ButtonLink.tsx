@@ -4,18 +4,19 @@ import { cn } from "@/lib/cn";
 type ButtonProps = {
   href: string;
   children: React.ReactNode;
-  variant?: "primary" | "secondary" | "ghost" | "onDark";
+  variant?: "primary" | "secondary" | "ghost" | "onDark" | "gold";
   className?: string;
 };
 
 const variants = {
-  primary:
-    "bg-primary text-white hover:bg-primary-dark focus-visible:outline-offset-2",
+  primary: "bg-gold text-navy hover:bg-gold-light",
   secondary:
-    "border border-primary/30 bg-transparent text-primary hover:border-primary hover:bg-primary/5",
-  ghost: "text-primary underline decoration-gold/80 underline-offset-4 hover:decoration-primary",
+    "border border-gold/50 bg-transparent text-gold-light hover:bg-white/5",
+  ghost:
+    "text-gold-light underline decoration-gold underline-offset-4 hover:text-gold",
   onDark:
-    "border border-gold-light/70 bg-transparent text-paper hover:bg-white/10",
+    "border border-gold-light/80 bg-transparent text-paper hover:bg-white/10",
+  gold: "bg-gold text-navy hover:bg-gold-light",
 };
 
 export function ButtonLink({

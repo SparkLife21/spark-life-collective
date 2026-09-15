@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { Logo } from "@/components/Logo";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
+import { Sunburst } from "@/components/Sunburst";
 import { contactEmail, socialLinks } from "@/lib/integrations";
 import { nav, site } from "@/lib/site";
 
@@ -9,11 +11,12 @@ export function Footer() {
   const email = contactEmail();
 
   return (
-    <footer className="mt-8 border-t border-ink/10 bg-ink text-paper">
-      <div className="mx-auto grid max-w-6xl gap-12 px-4 py-14 sm:px-6 md:grid-cols-[1.2fr_0.8fr_1fr]">
+    <footer className="relative mt-8 overflow-hidden bg-navy text-paper">
+      <Sunburst className="inset-0 opacity-40" />
+      <div className="relative mx-auto grid max-w-6xl gap-12 px-4 py-14 sm:px-6 md:grid-cols-[1.2fr_0.8fr_1fr]">
         <div>
-          <p className="font-serif text-2xl tracking-tight">Spark Life Collective</p>
-          <p className="mt-3 max-w-sm text-sm leading-relaxed text-paper/75">
+          <Logo variant="light" className="h-16 sm:h-20" />
+          <p className="mt-5 max-w-sm text-sm leading-relaxed text-paper/80">
             A nonprofit ministry. Free retreats, held open by the gifts of those
             who can give.
           </p>
@@ -77,14 +80,13 @@ export function Footer() {
             </ul>
           ) : (
             <p className="mt-6 text-xs leading-relaxed text-paper/55">
-              {/* OPEN DECISION: confirm social handles with Spark Life before adding — don't guess. */}
               Social links will appear here once handles are confirmed.
             </p>
           )}
         </div>
       </div>
 
-      <div className="border-t border-white/10">
+      <div className="relative border-t border-white/10">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-5 text-xs text-paper/55 sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <p>
             © {year} {site.copyrightName}. All rights reserved.

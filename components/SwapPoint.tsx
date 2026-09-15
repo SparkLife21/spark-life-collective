@@ -21,7 +21,7 @@ export function SwapPoint({
   description,
   children,
   className,
-  tone = "light",
+  tone = "dark",
 }: SwapPointProps) {
   const dark = tone === "dark";
   return (

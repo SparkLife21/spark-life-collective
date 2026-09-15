@@ -1,17 +1,20 @@
 /**
  * Spark Life Collective — site constants and copy.
  *
+ * Visual system follows the official brand kit: Faith navy (#023550) as the
+ * dominant field, Connection gold (#CC9752) as the primary accent. Do not
+ * revert to a light/cream-first layout.
+ *
  * OPEN DECISIONS (do not silently invent answers):
- * - Palette emphasis: defaulting to primary red + gold + paper/ink as dominant;
- *   moss, dusk, and heather are accent-only.
+ * - Approved mission statement: placeholder only.
  * - Facilitator photos: omitted (name + role + bio text only).
  * - Public relationship to Spark Life: placeholder only — do not describe.
- * - Approved mission/vision statement: not supplied.
  * - Whether Root & Rise sessions are recorded: unconfirmed.
  * - Giving platform: unconfirmed (Givebutter / Donorbox / PayPal Giving Fund / other).
- * - Jotform registration form: embed not supplied.
  * - Newsletter/email tool: unconfirmed.
  * - Contact inbox and social handles: unconfirmed — do not guess.
+ * - SPARK app mockup in the brand deck: do not reference as an SLC product
+ *   until Spark Life confirms it.
  */
 
 export const site = {
@@ -54,11 +57,19 @@ export const rootAndRise = {
   aspects: ["Spirituality", "Adversity"],
   scriptureReference: "James 1:2–4",
   format: "2 days, live on Zoom, 1 hour each day",
-  datesLabel: "October 6–7, 2026",
-  startDate: "2026-10-06",
-  endDate: "2026-10-07",
-  timeLabel: "1:00 PM ET / 12:00 PM CT / 11:00 AM MT / 10:00 AM PT",
+  datesLabel: "October 14–15, 2026",
+  datesFlyer: "Oct 14th & 15th",
+  startDate: "2026-10-14",
+  endDate: "2026-10-15",
+  timeEt: "1–2 PM ET",
+  timeLabel: "1–2 PM ET / 12–1 PM CT / 11 AM–12 PM MT / 10–11 AM PT",
+  timeLines: ["1–2 PM ET", "12–1 PM CT", "11 AM–12 PM MT", "10–11 AM PT"],
   cost: "Free — donation-supported",
+  limitedSpace: "Limited space available",
+  flyerSrc: "/images/root-and-rise-flyer.jpg",
+  flyerAlt:
+    "Root & Rise invitation: a garden at golden hour with raised beds, tomatoes, leafy greens, and sunflowers — no people. October 14th and 15th, free virtual retreat, 1–2 PM ET, limited space. Presented by Spark Life Collective.",
+  registerUrl: "https://form.jotform.com/sparklife21/slc-retreat-root-rise",
   facilitators: [
     {
       name: "Spark Life",

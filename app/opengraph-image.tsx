@@ -1,7 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt =
-  "Spark Life Collective — a nonprofit ministry. Symbolic dawn over still ground; no people.";
+export const alt = "Spark Life Collective — nonprofit ministry. Navy and gold wordmark.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -14,59 +13,32 @@ export default function OpenGraphImage() {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "flex-end",
-          background: "#14110f",
+          justifyContent: "center",
+          background: "#023550",
           padding: "72px",
-          position: "relative",
         }}
       >
         <div
           style={{
-            position: "absolute",
-            width: 520,
-            height: 520,
-            borderRadius: 520,
-            background: "#CC9752",
-            opacity: 0.35,
-            left: 340,
-            top: 220,
+            color: "#E4CB8A",
+            fontSize: 28,
+            marginBottom: 18,
           }}
-        />
+        >
+          Nonprofit ministry
+        </div>
         <div
           style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            bottom: 0,
-            height: 220,
-            background: "#1a1210",
+            color: "#EEEEE9",
+            fontSize: 72,
+            lineHeight: 1.05,
+            fontWeight: 500,
           }}
-        />
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div
-            style={{
-              color: "#E4CB8A",
-              fontSize: 22,
-              letterSpacing: 6,
-              textTransform: "uppercase",
-              marginBottom: 18,
-            }}
-          >
-            Nonprofit ministry
-          </div>
-          <div
-            style={{
-              color: "#ECEEE9",
-              fontSize: 72,
-              lineHeight: 1.05,
-              fontWeight: 500,
-            }}
-          >
-            Spark Life Collective
-          </div>
-          <div style={{ color: "#E4CB8A", fontSize: 28, marginTop: 16 }}>
-            Free retreats. Rooted in faith. Open to anyone.
-          </div>
+        >
+          Spark Life Collective
+        </div>
+        <div style={{ color: "#CC9752", fontSize: 28, marginTop: 20 }}>
+          Free retreats. Rooted in faith. Open to anyone.
         </div>
       </div>
     ),
