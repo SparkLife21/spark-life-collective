@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+/*
+  Spark Life Collective theme
+  Swap licensed files in later by pointing these families at local @font-face:
+    --font-mango     → Black Mango (Regular / Bold)
+    --font-narrow    → Agrandir Narrow
+    --font-script    → Holla or Vincentia
+    --font-sans      → Agrandir (body)
+  Current web fallbacks: Playfair Display, Barlow Condensed, Yellowtail, Outfit.
+*/
+@theme inline {
+  --color-navy: #023550;
+  --color-navy-deep: #01253a;
+  --color-paper: #eeeee9;
+  --color-gold: #cc9752;
+  --color-gold-light: #e4cb8a;
+  --color-sage: #768779;
+  --color-violet: #857ea2;
+  --color-dusk: #8ca2bd;
+  --color-clay: #9b3636;
+  --color-ink: #023550;
+  --color-background: var(--color-paper);
+  --color-foreground: var(--color-navy);
+  --font-mango: "Black Mango", var(--font-display), Georgia, "Times New Roman", serif;
+  --font-narrow: "Agrandir Narrow", var(--font-condensed), "Arial Narrow", sans-serif;
+  --font-script: "Holla", "Vincentia", var(--font-holla), "Segoe Script", cursive;
+  --font-sans: "Agrandir", var(--font-agrandir), "Segoe UI", sans-serif;
+  --font-serif: var(--font-mango);
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-navy);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-gold) 35%, white);
+  color: var(--color-navy);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -5rem;
+  z-index: 80;
+  border-radius: 999px;
+  background: var(--color-navy);
+  color: var(--color-paper);
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.font-mango {
+  font-family: var(--font-mango);
+}
+
+.font-narrow {
+  font-family: var(--font-narrow);
+}
+
+.font-script {
+  font-family: var(--font-script);
+}
+
+.kicker,
+.eyebrow {
+  font-family: var(--font-narrow);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.btn-gold {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--color-gold);
+  padding: 0.6rem 1.5rem;
+  font-family: var(--font-narrow);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fff;
+  transition: background 0.15s ease;
+}
+
+.btn-gold:hover {
+  background: #b88745;
+}
+
+.btn-outline {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid var(--color-navy);
+  background: transparent;
+  padding: 0.6rem 1.5rem;
+  font-family: var(--font-narrow);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-navy);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.btn-outline:hover {
+  background: var(--color-navy);
+  color: var(--color-paper);
+}
+
+.btn-outline-light {
+  border-color: rgba(238, 238, 233, 0.85);
+  color: var(--color-paper);
+}
+
+.btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
