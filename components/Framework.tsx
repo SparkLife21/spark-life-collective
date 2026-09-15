@@ -15,15 +15,58 @@ const aspects: Array<{
   name: string;
   items: string[];
   icon: LucideIcon;
-  tone: "navy" | "gold";
+  color: string;
+  iconClass: string;
 }> = [
-  { name: "Stability", items: ["Wealth", "Accountability", "Health"], icon: Flame, tone: "navy" },
-  { name: "Connection", items: ["Energy", "Intimacy", "Relationships"], icon: Users, tone: "gold" },
-  { name: "Empowerment", items: ["Career", "Purpose", "Individuality"], icon: Mountain, tone: "navy" },
-  { name: "Devotion", items: ["Adversity", "Adaptability", "Comfort"], icon: RefreshCw, tone: "gold" },
-  { name: "Expression", items: ["Creativity", "Communication", "Appearance"], icon: Sun, tone: "navy" },
-  { name: "Exploration", items: ["Adventure", "Play", "Dreaming"], icon: Compass, tone: "gold" },
-  { name: "Belief", items: ["Influence", "Curiosity", "Spirituality"], icon: Sparkle, tone: "navy" },
+  {
+    name: "Stability",
+    items: ["Wealth", "Accountability", "Health"],
+    icon: Flame,
+    color: "#9B3636",
+    iconClass: "text-paper",
+  },
+  {
+    name: "Connection",
+    items: ["Energy", "Intimacy", "Relationships"],
+    icon: Users,
+    color: "#CC9752",
+    iconClass: "text-navy",
+  },
+  {
+    name: "Empowerment",
+    items: ["Career", "Purpose", "Individuality"],
+    icon: Mountain,
+    color: "#E4CB8A",
+    iconClass: "text-navy",
+  },
+  {
+    name: "Devotion",
+    items: ["Adversity", "Adaptability", "Comfort"],
+    icon: RefreshCw,
+    color: "#768779",
+    iconClass: "text-paper",
+  },
+  {
+    name: "Expression",
+    items: ["Creativity", "Communication", "Appearance"],
+    icon: Sun,
+    color: "#8CA2BD",
+    iconClass: "text-navy",
+  },
+  {
+    name: "Exploration",
+    items: ["Adventure", "Play", "Dreaming"],
+    icon: Compass,
+    color: "#857EA2",
+    iconClass: "text-paper",
+  },
+  {
+    name: "Belief",
+    items: ["Influence", "Curiosity", "Spirituality"],
+    icon: Sparkle,
+    color: "#023550",
+    iconClass: "text-gold-light",
+  },
 ];
 
 export function Framework() {
@@ -32,7 +75,7 @@ export function Framework() {
       <div className="mx-auto max-w-6xl">
         <p className="kicker text-center text-navy/45">The Spark Life Framework</p>
         <h2 className="mt-3 text-center font-mango text-3xl font-normal text-navy sm:text-4xl">
-          Seven Aspects. Groups. A More Whole You.
+          7 Aspect Groups. A More God-Aligned You.
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-center text-navy/65">
           Our framework helps people grow in every area of life — because true
@@ -45,9 +88,8 @@ export function Framework() {
             return (
               <li key={aspect.name} className="flex flex-col items-center text-center">
                 <span
-                  className={`flex h-[4.6rem] w-[4.6rem] items-center justify-center rounded-full ${
-                    aspect.tone === "navy" ? "bg-navy text-gold-light" : "bg-gold text-navy"
-                  }`}
+                  className={`flex h-[4.6rem] w-[4.6rem] items-center justify-center rounded-full ${aspect.iconClass}`}
+                  style={{ backgroundColor: aspect.color }}
                   aria-hidden="true"
                 >
                   <Icon className="h-7 w-7" strokeWidth={1.4} />

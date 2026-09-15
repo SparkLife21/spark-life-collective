@@ -6,18 +6,18 @@ export function CTASection() {
     <section className="relative isolate min-h-[22rem] overflow-hidden lg:min-h-[24rem]">
       {/* TODO: replace with Spark Life approved photography — warm sunrise with a hopeful figure or group */}
       <Image
-        src="/images/homepage/cta-sunrise-silhouette.jpg"
-        alt="Silhouettes of people with arms raised toward a bright sunrise over the mountains."
+        src="/images/homepage/cta-arms-sunrise.jpg"
+        alt="A person with arms raised toward a bright sunrise over misty mountains."
         fill
-        className="object-cover object-[center_65%]"
+        className="object-cover object-[center_40%]"
         sizes="100vw"
       />
       <div
-        className="absolute inset-0 bg-gradient-to-r from-navy/70 via-navy/35 to-navy/25"
+        className="absolute inset-0 bg-gradient-to-r from-navy/55 via-navy/25 to-navy/15"
         aria-hidden="true"
       />
       <div
-        className="absolute inset-0 bg-gradient-to-t from-navy/40 via-transparent to-navy/15"
+        className="absolute inset-0 bg-gradient-to-t from-navy/30 via-transparent to-navy/10"
         aria-hidden="true"
       />
       <div className="relative mx-auto flex max-w-6xl flex-col gap-12 px-4 py-16 text-paper sm:px-6 lg:flex-row lg:items-end lg:justify-between lg:py-20">

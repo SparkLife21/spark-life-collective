@@ -7,22 +7,22 @@ const cards = [
     title: "Rest & Renew",
     subtitle: "Desert Renewal Retreat",
     meta: "Mar 16–17, 2025  |  Scottsdale, AZ",
-    src: "/images/homepage/retreat-desert-scottsdale.jpg",
-    alt: "Warm desert landscape at dusk.",
+    src: "/images/homepage/retreat-desert-renewal.jpg",
+    alt: "Two people sitting on a hillside at sunrise overlooking mountains.",
   },
   {
     title: "Connect & Grow",
     subtitle: "Community Retreat",
     meta: "May 25–26, 2025  |  San Diego, CA",
-    src: "/images/homepage/retreat-community-sandiego.jpg",
-    alt: "Coastal light over the water.",
+    src: "/images/homepage/retreat-community-fire.jpg",
+    alt: "A small group of adults sitting around a campfire at dusk.",
   },
   {
     title: "Lead with Purpose",
     subtitle: "Wild & Rooted",
     meta: "Sep 12–15, 2025  |  Asheville, NC",
-    src: "/images/homepage/retreat-mountain-asheville.jpg",
-    alt: "Mountain ridgeline under open sky.",
+    src: "/images/homepage/retreat-cabin-asheville.jpg",
+    alt: "A wooden cabin porch overlooking a mountain valley at golden hour.",
   },
 ];
 
@@ -56,7 +56,7 @@ export function Retreats() {
             <ul className="grid min-w-0 flex-1 gap-3 sm:grid-cols-3">
               {cards.map((card) => (
                 <li key={card.title}>
-                  <article className="relative aspect-[3/4] min-h-52 overflow-hidden rounded-md sm:min-h-0">
+                  <article className="relative aspect-[4/3] min-h-40 overflow-hidden rounded-md sm:min-h-0">
                     {/* TODO: replace with Spark Life approved photography */}
                     <Image
                       src={card.src}
