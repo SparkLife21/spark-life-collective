@@ -4,6 +4,7 @@ export const alt =
   "Root & Rise — October 14–15, 2026, 1–2 PM ET. Anchored faith through hardship. A sacred reset.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+export const dynamic = "force-static";
 
 export default function OpenGraphImage() {
   return new ImageResponse(

@@ -2,7 +2,7 @@
 
 Public website for **Spark Life Collective (SLC)** — a 501(c)(3) nonprofit ministry, established 2024. SLC is a separate legal entity from Spark Life (SparkLifeToday.com).
 
-Stack: **Next.js (App Router) + TypeScript + Tailwind CSS**. Deploy on Vercel.
+Stack: **Next.js (App Router) + TypeScript + Tailwind CSS**. The production build is a **static export** for **IONOS regular web hosting** (upload the `out/` folder over FTP — no Node server).
 
 ## Local development
 
@@ -13,6 +13,32 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
+
+## Deploy to IONOS (regular web hosting)
+
+This host serves HTML/CSS/JS. It cannot run `next start`. Build a static site, then upload it.
+
+1. Set the public URL (used in sitemap, robots, and Open Graph):
+
+   ```bash
+   echo "NEXT_PUBLIC_SITE_URL=https://your-domain.com" >> .env.local
+   ```
+
+2. Build:
+
+   ```bash
+   npm run build
+   ```
+
+   That writes static files to **`out/`**.
+
+3. In IONOS File Manager or FTP, open the web root (usually **`htdocs`** or **`httpdocs`**).
+
+4. Upload **the contents of `out/`** (not the `out` folder itself) into that web root. Include `.htaccess` — it is generated from `public/.htaccess`.
+
+5. Visit the domain. `/about/` and other routes should load without a Node process.
+
+If a path 404s, confirm `.htaccess` uploaded and that IONOS Apache `mod_rewrite` is on (it usually is). SSL is turned on in the IONOS panel, not in this repo.
 
 ## Homepage
 
