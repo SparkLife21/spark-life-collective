@@ -35,7 +35,7 @@ No variables are required. Two optional ones:
 | Variable | Effect |
 | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | Canonical URLs, `sitemap.xml`, and `robots.txt`. Defaults to the domain set in the workflow. |
-| `IONOS_SFTP_REMOTE_DIR` | Forces an upload folder. Leave unset — the deploy script checks where the SFTP account lands and, if it is already inside `/collective`, uploads straight there instead of nesting another folder. |
+| `IONOS_SFTP_REMOTE_DIR` | Publishes into a subfolder. Leave unset: the SFTP account lands directly in the folder the domain serves, so uploads go there. |
 
 ### 2. Ship
 

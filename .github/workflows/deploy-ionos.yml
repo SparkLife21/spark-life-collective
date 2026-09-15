@@ -8,9 +8,9 @@
 # Optional variables:
 #   NEXT_PUBLIC_SITE_URL     live https:// domain. Falls back to the SITE_URL
 #                            default below; set the variable to publish elsewhere.
-#   IONOS_SFTP_REMOTE_DIR    normally unset — the deploy script detects whether
-#                            the SFTP account already lands in /collective.
-#                            Set "." or a folder name to override.
+#   IONOS_SFTP_REMOTE_DIR    normally unset — the SFTP account already lands in
+#                            the folder the domain serves. Set a folder name to
+#                            publish into a subfolder instead.
 
 name: Deploy to IONOS
 
@@ -81,6 +81,9 @@ jobs:
           test -f out/index.html
           test -f out/.htaccess
 
+      - name: Stamp the build so the live site can be verified
+        run: echo "$GITHUB_SHA" > out/deploy-id.txt
+
       - name: Install SFTP client
         run: sudo apt-get update && sudo apt-get install -y sshpass
 
@@ -94,15 +97,16 @@ jobs:
 
       - name: Confirm the live site serves this build
         run: |
-          url="${SITE_URL%/}/sitemap.xml"
+          url="${SITE_URL%/}/deploy-id.txt"
           for attempt in 1 2 3 4 5; do
-            if curl -fsS --max-time 20 "$url" | grep -qF "${SITE_URL%/}/"; then
-              echo "Live sitemap on $SITE_URL matches this build."
+            live="$(curl -fsS --max-time 20 -H 'Cache-Control: no-cache' "$url?cb=$attempt" || true)"
+            if [ "$(echo "$live" | tr -d '[:space:]')" = "$GITHUB_SHA" ]; then
+              echo "$SITE_URL is serving $GITHUB_SHA."
               exit 0
             fi
-            echo "Attempt $attempt: $url did not match yet."
+            echo "Attempt $attempt: $url returned '${live:-nothing}', expected $GITHUB_SHA."
             sleep 10
           done
-          echo "The upload finished but $url does not reflect it."
-          echo "Confirm the IONOS domain points at the folder this SFTP account writes to."
+          echo "The upload finished but $SITE_URL is not serving this commit."
+          echo "Check which folder the IONOS domain is pointed at, then compare it to the SFTP home printed above."
           exit 1

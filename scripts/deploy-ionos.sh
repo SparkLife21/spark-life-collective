@@ -3,15 +3,13 @@
 # Required: IONOS_SFTP_HOST IONOS_SFTP_USER IONOS_SFTP_PASSWORD
 # Optional: IONOS_SFTP_REMOTE_DIR  IONOS_SFTP_PORT (default 22)
 #
-# Leave IONOS_SFTP_REMOTE_DIR unset and the target is detected: if the SFTP
-# account already lands in the site folder, files go there instead of into a
-# nested collective/ that the domain does not serve.
+# The IONOS SFTP account lands directly in the folder the domain serves, so the
+# default target is that home directory. Set IONOS_SFTP_REMOTE_DIR only to
+# publish into a subfolder.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
-
-SITE_DIR_NAME="collective"
 
 trim() {
   local s="$1"
@@ -43,6 +41,7 @@ HOST="$(normalize_host "${IONOS_SFTP_HOST:-}")"
 USER="$(trim "${IONOS_SFTP_USER:-}")"
 PASS="$(trim "${IONOS_SFTP_PASSWORD:-}")"
 REMOTE="$(trim "${IONOS_SFTP_REMOTE_DIR:-}")"
+[[ -z "$REMOTE" ]] && REMOTE="."
 PORT="${IONOS_SFTP_PORT:-${PORT:-22}}"
 
 if [[ -z "$HOST" || -z "$USER" || -z "$PASS" ]]; then
@@ -76,22 +75,13 @@ sftp_session() {
     -P "$PORT" "$USER@$HOST"
 }
 
-remote_home() {
-  printf 'pwd\nbye\n' | sftp_session 2>/dev/null |
-    sed -n 's/.*Remote working directory: *//p' | tail -1 | tr -d '\r'
-}
-
-if [[ -z "$REMOTE" ]]; then
-  home="$(remote_home || true)"
-  home="${home%/}"
-  if [[ -n "$home" && "${home##*/}" == "$SITE_DIR_NAME" ]]; then
-    # Already inside the folder the domain serves.
-    REMOTE="."
-    echo "SFTP account lands in ${home}; uploading there."
-  else
-    REMOTE="$SITE_DIR_NAME"
-    echo "SFTP account lands in ${home:-/}; uploading into ${REMOTE}/."
-  fi
+home="$(printf 'pwd\nbye\n' | sftp_session 2>/dev/null |
+  sed -n 's/.*Remote working directory: *//p' | tail -1 | tr -d '\r' || true)"
+echo "SFTP home: ${home:-unknown}"
+if [[ "$REMOTE" == "." ]]; then
+  echo "Uploading into that home directory (the folder the domain serves)."
+else
+  echo "Uploading into subfolder ${REMOTE}/ (IONOS_SFTP_REMOTE_DIR)."
 fi
 
 batch="$(mktemp)"
@@ -119,4 +109,4 @@ trap 'rm -f "$batch"' EXIT
 
 sftp_session <"$batch"
 
-echo "Uploaded out/ to IONOS ${REMOTE} over SFTP."
+echo "Uploaded out/ to IONOS over SFTP."
