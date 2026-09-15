@@ -6,7 +6,7 @@ export function CTASection() {
     <section className="relative isolate min-h-[22rem] overflow-hidden lg:min-h-[24rem]">
       {/* TODO: replace with Spark Life approved photography — warm sunrise with a hopeful figure or group */}
       <Image
-        src="/images/homepage/cta-sunrise-light.jpg"
+        src="/images/homepage/cta-sunrise-silhouette.jpg"
         alt="Silhouettes of people with arms raised toward a bright sunrise over the mountains."
         fill
         className="object-cover object-[center_65%]"
