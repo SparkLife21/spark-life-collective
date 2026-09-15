@@ -36,7 +36,9 @@ Variables:
 | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | Live URL, e.g. `https://your-domain.com` |
 
-Leave `IONOS_SFTP_REMOTE_DIR` unset so uploads go to `collective`. If this SFTP user is already locked to `/collective`, set that variable to `.`.
+Leave `IONOS_SFTP_REMOTE_DIR` unset. The deploy script checks where the SFTP account lands: if it is already inside `/collective`, files go straight there; otherwise they go into a `collective/` folder. Set the variable only to force a specific folder.
+
+`NEXT_PUBLIC_SITE_URL` is required. Without it `sitemap.xml` and `robots.txt` are built pointing at `http://localhost:3000`.
 
 ### 2. Ship
 

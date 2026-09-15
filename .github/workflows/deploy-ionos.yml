@@ -1,5 +1,5 @@
 # GitHub → IONOS regular web hosting.
-# Builds the static export and uploads it over SFTP into /collective.
+# Builds the static export and uploads it over SFTP to the folder the domain serves.
 #
 # Repo secrets (Settings → Secrets and variables → Actions):
 #   IONOS_SFTP_HOST      from IONOS SFTP details (often access….webspace-data.io)
@@ -8,8 +8,9 @@
 # Repo variable:
 #   NEXT_PUBLIC_SITE_URL     live https:// domain
 # Optional variable:
-#   IONOS_SFTP_REMOTE_DIR    default "collective". Set to "." if this SFTP user
-#                            is already jailed to /collective.
+#   IONOS_SFTP_REMOTE_DIR    normally unset — the deploy script detects whether
+#                            the SFTP account already lands in /collective.
+#                            Set "." or a folder name to override.
 
 name: Deploy to IONOS
 
@@ -56,6 +57,17 @@ jobs:
 
       - run: npm ci
 
+      - name: Check public site URL
+        env:
+          SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
+        run: |
+          if [ -z "$SITE_URL" ]; then
+            echo "Set repository variable NEXT_PUBLIC_SITE_URL to the live domain."
+            echo "Without it, sitemap.xml and robots.txt point at http://localhost:3000."
+            echo "https://github.com/${GITHUB_REPOSITORY}/settings/variables/actions"
+            exit 1
+          fi
+
       - run: npm run build
         env:
           NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
@@ -68,12 +80,27 @@ jobs:
       - name: Install SFTP client
         run: sudo apt-get update && sudo apt-get install -y sshpass
 
-      - name: Upload out/ to IONOS /collective
+      - name: Upload out/ to IONOS
         env:
           IONOS_SFTP_HOST: ${{ secrets.IONOS_SFTP_HOST }}
           IONOS_SFTP_USER: ${{ secrets.IONOS_SFTP_USER }}
           IONOS_SFTP_PASSWORD: ${{ secrets.IONOS_SFTP_PASSWORD }}
           IONOS_SFTP_REMOTE_DIR: ${{ vars.IONOS_SFTP_REMOTE_DIR }}
+        run: bash scripts/deploy-ionos.sh
+
+      - name: Confirm the live site serves this build
+        env:
+          SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
         run: |
-          export IONOS_SFTP_REMOTE_DIR="${IONOS_SFTP_REMOTE_DIR:-collective}"
-          bash scripts/deploy-ionos.sh
+          url="${SITE_URL%/}/sitemap.xml"
+          for attempt in 1 2 3 4 5; do
+            if curl -fsS --max-time 20 "$url" | grep -qF "${SITE_URL%/}/"; then
+              echo "Live sitemap on $SITE_URL matches this build."
+              exit 0
+            fi
+            echo "Attempt $attempt: $url did not match yet."
+            sleep 10
+          done
+          echo "The upload finished but $url does not reflect it."
+          echo "Confirm the IONOS domain points at the folder this SFTP account writes to."
+          exit 1
