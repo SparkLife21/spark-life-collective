@@ -16,7 +16,9 @@ name: Deploy to IONOS
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches:
+      - main
+      - cursor/ionos-static-hosting-4b98
 
 concurrency:
   group: ionos-production
