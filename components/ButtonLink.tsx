@@ -22,8 +22,24 @@ export function ButtonLink({
   variant = "primary",
   className,
 }: ButtonProps) {
+  const classNames = cn(variants[variant], className);
+  const external = /^https?:\/\//.test(href);
+
+  if (external) {
+    return (
+      <a
+        href={href}
+        className={classNames}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {children}
+      </a>
+    );
+  }
+
   return (
-    <Link href={href} className={cn(variants[variant], className)}>
+    <Link href={href} className={classNames}>
       {children}
     </Link>
   );

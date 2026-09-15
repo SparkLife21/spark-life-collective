@@ -41,9 +41,10 @@ export default function RetreatsPage() {
               <p className="mt-1 text-sm text-paper/70">
                 {rootAndRise.format} · {rootAndRise.limitedSpace}
               </p>
-              <div className="mt-8">
-                <ButtonLink href={rootAndRise.href}>
-                  Details &amp; registration
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <ButtonLink href={rootAndRise.registerUrl}>Register now</ButtonLink>
+                <ButtonLink href={rootAndRise.href} variant="onDark">
+                  Details
                 </ButtonLink>
               </div>
             </div>
@@ -88,6 +89,13 @@ export default function RetreatsPage() {
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-navy/70">
                   {retreat.theme}
                 </p>
+                {retreat.scheduled ? (
+                  <p className="mt-4">
+                    <ButtonLink href={rootAndRise.registerUrl}>
+                      Register now
+                    </ButtonLink>
+                  </p>
+                ) : null}
               </li>
             ))}
           </ul>
