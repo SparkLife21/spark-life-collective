@@ -1,14 +1,28 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { jotformRootAndRiseUrl } from "@/lib/integrations";
+import { rootAndRise } from "@/lib/site";
 
-const cards = [
+type RetreatCard = {
+  title: string;
+  subtitle: string;
+  meta: string;
+  src: string;
+  alt: string;
+  href?: string;
+  registerUrl?: string;
+};
+
+const cards: RetreatCard[] = [
   {
-    title: "Rest & Renew",
-    subtitle: "Desert Renewal Retreat",
-    meta: "Mar 16–17, 2025  |  Scottsdale, AZ",
-    src: "/images/homepage/retreat-desert-renewal.jpg",
-    alt: "Two people sitting on a hillside at sunrise overlooking mountains.",
+    title: "Root & Rise",
+    subtitle: "Anchored faith through hardship",
+    meta: `${rootAndRise.datesFlyer}  |  ${rootAndRise.timeEt}  |  Virtual`,
+    src: rootAndRise.flyerSrc,
+    alt: rootAndRise.flyerAlt,
+    href: rootAndRise.href,
+    registerUrl: jotformRootAndRiseUrl(),
   },
   {
     title: "Connect & Grow",
@@ -57,23 +71,44 @@ export function Retreats() {
               {cards.map((card) => (
                 <li key={card.title}>
                   <article className="relative aspect-[4/3] min-h-40 overflow-hidden rounded-md sm:min-h-0">
-                    {/* TODO: replace with Spark Life approved photography */}
                     <Image
                       src={card.src}
                       alt={card.alt}
                       fill
-                      className="object-cover"
+                      className={
+                        card.registerUrl
+                          ? "object-cover object-top"
+                          : "object-cover"
+                      }
                       sizes="(max-width: 640px) 100vw, 22vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/30 to-navy/10" />
                     <div className="absolute inset-x-0 bottom-0 p-3.5 text-paper">
-                      <h3 className="kicker text-gold-light">{card.title}</h3>
+                      <h3 className="kicker text-gold-light">
+                        {card.href ? (
+                          <Link href={card.href} className="hover:text-paper">
+                            {card.title}
+                          </Link>
+                        ) : (
+                          card.title
+                        )}
+                      </h3>
                       <p className="mt-1.5 font-mango text-[1.05rem] leading-snug">
                         {card.subtitle}
                       </p>
                       <p className="mt-1.5 font-narrow text-[0.68rem] uppercase tracking-[0.14em] text-paper/80">
                         {card.meta}
                       </p>
+                      {card.registerUrl ? (
+                        <a
+                          href={card.registerUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-gold mt-3 min-h-8 px-3 text-[0.65rem]"
+                        >
+                          Register now
+                        </a>
+                      ) : null}
                     </div>
                   </article>
                 </li>

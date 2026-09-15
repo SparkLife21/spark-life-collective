@@ -22,8 +22,8 @@ export function Logo({
     <Image
       src={src}
       alt={site.name}
-      width={1600}
-      height={963}
+      width={variant === "light" ? 1215 : 1600}
+      height={variant === "light" ? 732 : 963}
       priority={priority}
       className={cn("h-14 w-auto sm:h-16", className)}
     />

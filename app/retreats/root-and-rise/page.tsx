@@ -127,7 +127,7 @@ export default function RootAndRisePage() {
               translation they want used.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <ButtonLink href="#register">Register free</ButtonLink>
+              <ButtonLink href={rootAndRise.registerUrl}>Register now</ButtonLink>
               <ButtonLink href="/give" variant="secondary">
                 Give
               </ButtonLink>
