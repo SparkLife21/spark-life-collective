@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cinzel, Outfit, Yellowtail } from "next/font/google";
+import { Barlow_Condensed, Outfit, Playfair_Display, Yellowtail } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { getSiteUrl, site } from "@/lib/site";
@@ -12,8 +12,15 @@ const holla = Yellowtail({
   display: "swap",
 });
 
-const mango = Cinzel({
-  variable: "--font-mango",
+const display = Playfair_Display({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const condensed = Barlow_Condensed({
+  variable: "--font-condensed",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
@@ -32,7 +39,7 @@ export const metadata: Metadata = {
     template: `%s · ${site.name}`,
   },
   description:
-    "Spark Life Collective is a 501(c)(3) nonprofit ministry offering free virtual retreats, funded by donations so the content stays accessible regardless of ability to pay.",
+    "Spark Life Collective is a 501(c)(3) nonprofit offering Christ-centered experiences, resources, and training for individuals, churches, and organizations.",
   applicationName: site.name,
   keywords: [
     "Spark Life Collective",
@@ -40,7 +47,6 @@ export const metadata: Metadata = {
     "virtual retreat",
     "Root & Rise",
     "Christian retreat",
-    "free retreat",
   ],
   authors: [{ name: site.name }],
   openGraph: {
@@ -55,7 +61,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#023550",
+  themeColor: "#EEEEE9",
   width: "device-width",
   initialScale: 1,
 };
@@ -64,9 +70,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${holla.variable} ${mango.variable} ${agrandir.variable} h-full scroll-smooth antialiased`}
+      className={`${holla.variable} ${display.variable} ${condensed.variable} ${agrandir.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-navy font-sans text-paper">
+      <body className="flex min-h-full flex-col bg-paper font-sans text-navy">
         <a href="#main" className="skip-link">
           Skip to content
         </a>

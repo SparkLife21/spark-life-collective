@@ -33,15 +33,15 @@ export function ContactForm() {
   }
 
   const fieldClass =
-    "min-h-12 rounded-sm border border-gold/30 bg-white/5 px-3 font-normal text-paper";
+    "min-h-12 rounded-sm border border-navy/15 bg-white px-3 font-normal text-navy";
 
   return (
     <form onSubmit={onSubmit} className="grid gap-5">
-      <label className="grid gap-1 text-sm font-medium text-paper">
+      <label className="grid gap-1 text-sm font-medium text-navy">
         Name
         <input name="name" required autoComplete="name" className={fieldClass} />
       </label>
-      <label className="grid gap-1 text-sm font-medium text-paper">
+      <label className="grid gap-1 text-sm font-medium text-navy">
         Email
         <input
           type="email"
@@ -51,23 +51,23 @@ export function ContactForm() {
           className={fieldClass}
         />
       </label>
-      <label className="grid gap-1 text-sm font-medium text-paper">
+      <label className="grid gap-1 text-sm font-medium text-navy">
         Message
         <textarea
           name="message"
           required
           rows={6}
-          className="rounded-sm border border-gold/30 bg-white/5 px-3 py-3 font-normal text-paper"
+          className="rounded-sm border border-navy/15 bg-white px-3 py-3 font-normal text-navy"
         />
       </label>
       <button
         type="submit"
-        className="inline-flex min-h-12 w-fit items-center rounded-sm bg-gold px-6 font-semibold text-navy hover:bg-gold-light"
+        className="inline-flex min-h-11 w-fit items-center rounded-full bg-gold px-8 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-white hover:bg-[#b88745]"
       >
         Send message
       </button>
       {sent ? (
-        <p className="text-sm text-gold-light">
+        <p className="text-sm text-sage">
           Your email app should open with the message addressed to the confirmed
           inbox.
         </p>

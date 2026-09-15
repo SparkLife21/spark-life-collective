@@ -32,7 +32,7 @@ export default function ContactPage() {
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="text-gold-light underline decoration-gold underline-offset-4"
+                  className="text-navy underline decoration-gold underline-offset-4"
                   rel="noopener noreferrer"
                 >
                   {item.label}
@@ -41,7 +41,7 @@ export default function ContactPage() {
             ))}
           </ul>
         ) : (
-          <p className="mt-10 text-sm text-paper/60">
+          <p className="mt-10 text-sm text-navy/55">
             Social links will be added once Spark Life confirms the handles.
           </p>
         )}

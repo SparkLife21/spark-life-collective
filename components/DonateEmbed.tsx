@@ -12,7 +12,7 @@ export function DonateEmbed({ heading = "Give" }: DonateEmbedProps) {
     return (
       <a
         href={href}
-        className="inline-flex min-h-12 items-center justify-center rounded-sm bg-gold px-8 text-base font-semibold text-navy hover:bg-gold-light"
+        className="inline-flex min-h-11 items-center justify-center rounded-full bg-gold px-8 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-white hover:bg-[#b88745]"
       >
         {heading}
       </a>
@@ -26,7 +26,7 @@ export function DonateEmbed({ heading = "Give" }: DonateEmbedProps) {
       title="Donate button — awaiting platform"
       description="No giving platform has been confirmed. Givebutter and Donorbox are common low-fee options for small nonprofits — flagged as options, not a decision made on Spark Life’s behalf. Set NEXT_PUBLIC_DONATE_URL (or replace this block with an embed) when the platform is chosen."
     >
-      <p className="mt-4 text-sm font-medium text-paper/70">
+      <p className="mt-4 text-sm font-medium text-navy/70">
         Placeholder CTA: Give — swap this for the live donate link or embed.
       </p>
     </SwapPoint>

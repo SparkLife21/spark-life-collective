@@ -1,5 +1,6 @@
 "use client";
 
+import { Search } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
@@ -28,71 +29,68 @@ export function Header() {
   }
 
   return (
-    <header className="relative sticky top-0 z-40 border-b border-gold/20 bg-navy/95 backdrop-blur-md">
+    <header className="relative sticky top-0 z-40 border-b border-navy/8 bg-paper/95 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <Link href="/" className="rounded-sm" aria-label={`${site.name} home`}>
-          <Logo variant="light" priority />
+        <Link href="/" className="shrink-0" aria-label={`${site.name} home`}>
+          <Logo variant="navy" priority className="h-10 sm:h-11" />
         </Link>
 
-        <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-5 xl:flex" aria-label="Primary">
           {nav.primary.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "text-sm font-medium tracking-wide text-paper/80 transition-colors hover:text-gold",
-                pathname === item.href && "text-gold-light",
+                "kicker text-navy/70 transition-colors hover:text-navy",
+                pathname === item.href && "text-navy",
               )}
             >
               {item.label}
             </Link>
           ))}
-          <Link
-            href="/give"
-            className="text-sm font-semibold tracking-wide text-gold hover:text-gold-light"
-          >
-            Give
-          </Link>
-          <Link
-            href="/retreats/root-and-rise"
-            className="inline-flex min-h-11 items-center rounded-sm bg-gold px-4 text-sm font-semibold text-navy hover:bg-gold-light"
-          >
-            Join Root &amp; Rise
-          </Link>
         </nav>
 
-        <details ref={detailsRef} className="group lg:hidden">
+        <div className="hidden items-center gap-3 xl:flex">
+          <Link href="/give" className="btn-gold min-h-9 px-5">
+            Donate
+          </Link>
+          <button
+            type="button"
+            className="inline-flex min-h-9 min-w-9 items-center justify-center text-navy"
+            aria-label="Search"
+          >
+            <Search className="h-4 w-4" strokeWidth={1.75} />
+          </button>
+        </div>
+
+        <details ref={detailsRef} className="group xl:hidden">
           <summary className="block cursor-pointer list-none marker:content-none [&::-webkit-details-marker]:hidden">
-            <span className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm border border-gold/40">
+            <span className="inline-flex min-h-10 min-w-10 items-center justify-center rounded-full border border-navy/20">
               <span className="sr-only">Menu</span>
               <span className="flex flex-col gap-1.5" aria-hidden="true">
-                <span className="block h-px w-5 bg-gold-light transition-transform group-open:translate-y-1 group-open:rotate-45" />
-                <span className="block h-px w-5 bg-gold-light group-open:opacity-0" />
-                <span className="block h-px w-5 bg-gold-light transition-transform group-open:-translate-y-1.5 group-open:-rotate-45" />
+                <span className="block h-px w-5 bg-navy transition-transform group-open:translate-y-1 group-open:rotate-45" />
+                <span className="block h-px w-5 bg-navy group-open:opacity-0" />
+                <span className="block h-px w-5 bg-navy transition-transform group-open:-translate-y-1.5 group-open:-rotate-45" />
               </span>
             </span>
           </summary>
           <nav
-            className="absolute inset-x-0 top-full z-50 border-b border-gold/20 bg-navy px-4 py-4 shadow-lg sm:px-6"
+            className="absolute inset-x-0 top-full z-50 border-b border-navy/10 bg-paper px-4 py-5 shadow-lg sm:px-6"
             aria-label="Mobile"
           >
-            <div className="mx-auto flex max-w-6xl flex-col gap-1">
-              {[...nav.primary, { href: "/give", label: "Give" }].map((item) => (
+            <div className="mx-auto flex max-w-6xl flex-col">
+              {nav.primary.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   onClick={closeMenu}
-                  className="rounded-sm px-2 py-3 text-base font-medium text-paper hover:bg-white/5"
+                  className="kicker py-3 text-navy"
                 >
                   {item.label}
                 </Link>
               ))}
-              <Link
-                href="/retreats/root-and-rise"
-                onClick={closeMenu}
-                className="mt-2 inline-flex min-h-12 items-center justify-center rounded-sm bg-gold px-4 font-semibold text-navy"
-              >
-                Join Root &amp; Rise
+              <Link href="/give" onClick={closeMenu} className="btn-gold mt-3">
+                Donate
               </Link>
             </div>
           </nav>

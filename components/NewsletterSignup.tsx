@@ -13,10 +13,12 @@ export function NewsletterSignup({
   id = "email-signup",
 }: NewsletterSignupProps) {
   const action = newsletterActionUrl();
+  const dark = variant === "footer";
 
   if (action) {
-    const fieldClass =
-      "min-h-11 rounded-sm border border-gold/30 bg-white/5 px-3 text-paper";
+    const fieldClass = dark
+      ? "min-h-11 rounded-full border border-white/20 bg-white/5 px-4 text-paper"
+      : "min-h-11 rounded-full border border-navy/15 bg-white px-4 text-navy";
 
     return (
       <form
@@ -38,7 +40,7 @@ export function NewsletterSignup({
         <label className="grid gap-1 text-sm">
           <span>
             Name{" "}
-            <span className="text-paper/50">
+            <span className={dark ? "text-paper/50" : "text-navy/45"}>
               (optional)
             </span>
           </span>
@@ -51,7 +53,7 @@ export function NewsletterSignup({
         </label>
         <button
           type="submit"
-          className="min-h-11 rounded-sm bg-gold px-4 text-sm font-semibold text-navy hover:bg-gold-light"
+          className="min-h-11 rounded-full bg-gold px-4 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-white hover:bg-[#b88745]"
         >
           Get retreat updates
         </button>
@@ -65,7 +67,7 @@ export function NewsletterSignup({
       comment="EMAIL SIGNUP: connect to ESP"
       title="Email signup — awaiting ESP"
       description="A name (optional) and email capture will live here for people who want future retreat news without registering for Root & Rise. Wire this to Spark Life’s existing email tool when confirmed."
-      tone="dark"
+      tone={dark ? "dark" : "light"}
     />
   );
 }

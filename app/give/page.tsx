@@ -26,22 +26,22 @@ export default function GivePage() {
         <DonateEmbed />
 
         <section>
-          <h2 className="font-serif text-2xl font-normal text-paper">
+          <h2 className="font-serif text-2xl font-normal text-navy">
             Tax deductibility
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-paper/85">
+          <p className="mt-4 text-lg leading-relaxed text-navy/80">
             {site.nonprofitLine}
           </p>
-          <p className="mt-3 text-sm italic text-gold-light/80">
+          <p className="mt-3 text-sm italic text-sage">
             [CONFIRM EIN / receipt process with Spark Life before publishing]
           </p>
         </section>
 
         <section>
-          <h2 className="font-serif text-2xl font-normal text-paper">
+          <h2 className="font-serif text-2xl font-normal text-navy">
             Where your gift goes
           </h2>
-          <p className="mt-4 rounded-sm border border-dashed border-dusk/50 bg-dusk/10 px-4 py-5 text-paper/80">
+          <p className="mt-4 rounded-sm border border-dashed border-dusk/50 bg-dusk/10 px-4 py-5 text-navy/75">
             [WHERE YOUR GIFT GOES — insert once defined]
           </p>
         </section>

@@ -1,9 +1,9 @@
 /**
  * Spark Life Collective — site constants and copy.
  *
- * Visual system follows the official brand kit: Faith navy (#023550) as the
- * dominant field, Connection gold (#CC9752) as the primary accent. Do not
- * revert to a light/cream-first layout.
+ * Visual system follows the supplied homepage mock: Belief cream as the
+ * page field, Faith navy for type, Connection gold for CTAs, photography
+ * in the hero and bands. Official palette hex values are unchanged.
  *
  * OPEN DECISIONS (do not silently invent answers):
  * - Approved mission statement: placeholder only.
@@ -38,14 +38,17 @@ export const nav = {
   primary: [
     { href: "/about", label: "About" },
     { href: "/retreats", label: "Retreats" },
-    { href: "/contact", label: "Contact" },
+    { href: "/programs", label: "Programs" },
+    { href: "/partner", label: "Partner" },
+    { href: "/resources", label: "Resources" },
+    { href: "/get-involved", label: "Get Involved" },
   ],
   footer: [
-    { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/retreats", label: "Retreats" },
-    { href: "/retreats/root-and-rise", label: "Root & Rise" },
-    { href: "/give", label: "Give" },
+    { href: "/programs", label: "Programs" },
+    { href: "/partner", label: "Partner" },
+    { href: "/resources", label: "Resources" },
     { href: "/contact", label: "Contact" },
   ],
 } as const;

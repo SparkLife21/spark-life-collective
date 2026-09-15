@@ -9,23 +9,21 @@ export function FaithPillars() {
 
   return (
     <section aria-label="F.A.I.T.H. pillars">
-      <p className="eyebrow text-gold-light">The SLC lens</p>
-      <h2 className="mt-2 font-serif text-4xl tracking-wide text-paper">
-        F.A.I.T.H.
-      </h2>
+      <p className="kicker text-center text-navy/45">The SLC lens</p>
+      <h2 className="mt-2 text-center font-serif text-4xl text-navy">F.A.I.T.H.</h2>
       <ul className="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4">
         {pillars.map((pillar, index) => (
           <li
             key={pillar.letter}
-            className="flex flex-col items-center text-center lg:border-l lg:border-gold/20 lg:first:border-l-0 lg:px-3"
+            className="flex flex-col items-center text-center lg:border-l lg:border-navy/10 lg:first:border-l-0 lg:px-3"
           >
             <span className="font-serif text-sm tracking-[0.35em] text-gold">
               {pillar.letter}
             </span>
-            <div className="mt-5 text-gold-light" aria-hidden="true">
+            <div className="mt-5 text-gold" aria-hidden="true">
               <PillarIcon name={pillar.icon} />
             </div>
-            <p className="mt-5 font-serif text-xl text-paper">{pillar.name}</p>
+            <p className="mt-5 font-serif text-xl text-navy">{pillar.name}</p>
             <span className="sr-only">
               {index + 1} of 5: {pillar.name}
             </span>

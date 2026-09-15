@@ -21,7 +21,7 @@ export function SwapPoint({
   description,
   children,
   className,
-  tone = "dark",
+  tone = "light",
 }: SwapPointProps) {
   const dark = tone === "dark";
   return (
@@ -32,17 +32,17 @@ export function SwapPoint({
         "rounded-sm border border-dashed px-5 py-8 text-left sm:px-8",
         dark
           ? "border-gold/50 bg-white/5"
-          : "border-gold/70 bg-gold-light/10",
+          : "border-gold/70 bg-gold-light/15",
         className,
       )}
     >
-      <p className={cn("eyebrow", dark ? "text-gold-light" : "text-primary")}>
+      <p className={cn("eyebrow", dark ? "text-gold-light" : "text-gold")}>
         {title}
       </p>
       <p
         className={cn(
           "mt-3 max-w-2xl text-sm leading-relaxed",
-          dark ? "text-paper/75" : "text-ink/75",
+          dark ? "text-paper/75" : "text-navy/70",
         )}
       >
         {description}

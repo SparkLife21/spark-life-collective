@@ -25,12 +25,12 @@ export function PageIntro({
 }) {
   return (
     <header className="mx-auto max-w-3xl">
-      {eyebrow ? <p className="eyebrow text-gold-light">{eyebrow}</p> : null}
-      <h1 className="mt-3 font-serif text-4xl font-normal tracking-tight text-paper sm:text-5xl">
+      {eyebrow ? <p className="kicker text-gold">{eyebrow}</p> : null}
+      <h1 className="mt-3 font-mango text-4xl font-normal tracking-tight text-navy sm:text-5xl">
         {title}
       </h1>
       {children ? (
-        <div className="prose-slc mt-6 text-lg text-paper/80">{children}</div>
+        <div className="mt-6 text-lg text-navy/75">{children}</div>
       ) : null}
     </header>
   );

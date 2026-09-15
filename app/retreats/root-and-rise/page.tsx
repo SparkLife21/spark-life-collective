@@ -4,7 +4,6 @@ import { DonateEmbed } from "@/components/DonateEmbed";
 import { RegistrationEmbed } from "@/components/RegistrationEmbed";
 import { RetreatFlyer } from "@/components/RetreatFlyer";
 import { Section } from "@/components/Section";
-import { Sunburst } from "@/components/Sunburst";
 import { ConfirmNote, DraftNote } from "@/components/StatusNotes";
 import { pageMetadata } from "@/lib/metadata";
 import { copy, getSiteUrl, rootAndRise } from "@/lib/site";
@@ -95,36 +94,35 @@ export default function RootAndRisePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <section className="relative isolate overflow-hidden border-b border-gold/20 bg-navy">
-        <Sunburst className="right-[-10rem] top-[-8rem] h-[40rem] w-[40rem] opacity-70" />
-        <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:py-16">
-          <div className="overflow-hidden rounded-sm border border-gold/25">
+      <section className="bg-paper">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:py-16">
+          <div className="overflow-hidden rounded-sm border border-navy/10">
             <RetreatFlyer priority />
           </div>
           <div>
-            <p className="eyebrow text-gold-light">
+            <p className="eyebrow text-gold">
               {rootAndRise.aspects.join(" + ")}
             </p>
-            <h1 className="mt-4 font-serif text-5xl font-normal leading-[0.95] tracking-tight text-paper sm:text-7xl">
+            <h1 className="mt-4 font-serif text-5xl font-normal leading-[0.95] tracking-tight text-navy sm:text-7xl">
               Root{" "}
               <span className="font-script text-gold" aria-hidden="true">
                 &amp;
               </span>{" "}
               Rise
             </h1>
-            <p className="mt-6 max-w-xl font-serif text-2xl italic text-paper/85">
+            <p className="mt-6 max-w-xl font-serif text-2xl italic text-navy/75">
               {rootAndRise.theme}
             </p>
-            <p className="mt-6 text-lg font-semibold text-gold">
+            <p className="mt-6 text-lg font-semibold text-navy">
               {rootAndRise.datesFlyer} · {rootAndRise.timeEt}
             </p>
-            <p className="mt-1 font-serif text-base text-gold-light">
+            <p className="mt-1 font-serif text-base text-gold">
               Free virtual retreat · {rootAndRise.limitedSpace}
             </p>
-            <p className="mt-6 text-sm tracking-wide text-paper/70">
+            <p className="mt-6 text-sm tracking-wide text-navy/60">
               Scripture · {rootAndRise.scriptureReference}
             </p>
-            <p className="mt-2 max-w-xl text-sm text-paper/50">
+            <p className="mt-2 max-w-xl text-sm text-navy/45">
               Full verse text will be added when Spark Life supplies the
               translation they want used.
             </p>
@@ -138,7 +136,7 @@ export default function RootAndRisePage() {
         </div>
       </section>
 
-      <Section>
+      <Section className="bg-white">
         <dl className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
           {[
             { label: "Format", value: rootAndRise.format },
@@ -154,9 +152,9 @@ export default function RootAndRisePage() {
             },
             { label: "Space", value: rootAndRise.limitedSpace },
           ].map((item) => (
-            <div key={item.label} className="border-t border-gold/25 pt-4">
-              <dt className="eyebrow text-gold-light">{item.label}</dt>
-              <dd className="mt-2 text-sm leading-relaxed text-paper/85">
+            <div key={item.label} className="border-t border-navy/15 pt-4">
+              <dt className="eyebrow text-gold">{item.label}</dt>
+              <dd className="mt-2 text-sm leading-relaxed text-navy/80">
                 {"lines" in item && item.lines ? (
                   <ul className="space-y-1">
                     {item.lines.map((line) => (
@@ -181,23 +179,23 @@ export default function RootAndRisePage() {
 
       <Section className="pt-0">
         <div className="mx-auto max-w-3xl">
-          <h2 className="font-serif text-3xl font-normal text-paper">
+          <h2 className="font-serif text-3xl font-normal text-navy">
             What to expect
           </h2>
           <DraftNote className="mt-5">
-            <p className="text-lg leading-relaxed text-paper/85">
+            <p className="text-lg leading-relaxed text-navy/80">
               {copy.rootAndRiseExpect.text}
             </p>
           </DraftNote>
         </div>
       </Section>
 
-      <Section className="pt-0">
+      <Section className="bg-white pt-0">
         <div className="mx-auto max-w-3xl">
-          <h2 className="font-serif text-3xl font-normal text-paper">
+          <h2 className="font-serif text-3xl font-normal text-navy">
             Facilitators
           </h2>
-          <p className="mt-2 text-sm text-paper/60">
+          <p className="mt-2 text-sm text-navy/55">
             Name, role, and bio text only — no photos unless Spark Life asks for
             them here.
           </p>
@@ -205,13 +203,11 @@ export default function RootAndRisePage() {
             {rootAndRise.facilitators.map((person) => (
               <li
                 key={person.name}
-                className="rounded-sm border border-gold/20 bg-navy-deep p-6"
+                className="rounded-sm border border-navy/10 bg-paper p-6"
               >
-                <p className="font-serif text-2xl text-paper">{person.name}</p>
+                <p className="font-serif text-2xl text-navy">{person.name}</p>
                 <p className="mt-1 text-sm font-medium text-gold">{person.role}</p>
-                <p className="mt-4 text-sm text-gold-light/80">
-                  [FACILITATOR BIOS — insert]
-                </p>
+                <p className="mt-4 text-sm text-sage">[FACILITATOR BIOS — insert]</p>
               </li>
             ))}
           </ul>
@@ -220,8 +216,8 @@ export default function RootAndRisePage() {
 
       <Section className="pt-0" id="register">
         <div className="mx-auto max-w-3xl">
-          <h2 className="font-serif text-3xl font-normal text-paper">Register</h2>
-          <p className="mt-3 text-paper/75">
+          <h2 className="font-serif text-3xl font-normal text-navy">Register</h2>
+          <p className="mt-3 text-navy/70">
             Root &amp; Rise is free. Space is limited. Registration helps us
             send you the Zoom details and know who is in the room.
           </p>
@@ -231,10 +227,10 @@ export default function RootAndRisePage() {
         </div>
       </Section>
 
-      <Section className="pt-0" id="giving">
+      <Section className="bg-white pt-0" id="giving">
         <div className="mx-auto max-w-3xl">
-          <h2 className="font-serif text-3xl font-normal text-paper">Give</h2>
-          <p className="mt-3 text-lg leading-relaxed text-paper/85">
+          <h2 className="font-serif text-3xl font-normal text-navy">Give</h2>
+          <p className="mt-3 text-lg leading-relaxed text-navy/80">
             The retreat is free. Donations keep it that way — so someone who
             could not pay still has a seat.
           </p>
@@ -251,11 +247,11 @@ export default function RootAndRisePage() {
 
       <Section className="pt-0">
         <div className="mx-auto max-w-3xl">
-          <h2 className="font-serif text-3xl font-normal text-paper">FAQ</h2>
-          <div className="mt-8 divide-y divide-gold/20 border-y border-gold/20">
+          <h2 className="font-serif text-3xl font-normal text-navy">FAQ</h2>
+          <div className="mt-8 divide-y divide-navy/10 border-y border-navy/10">
             {faqs.map((item) => (
               <details key={item.question} className="group py-5">
-                <summary className="cursor-pointer list-none font-semibold text-paper marker:content-none [&::-webkit-details-marker]:hidden">
+                <summary className="cursor-pointer list-none font-semibold text-navy marker:content-none [&::-webkit-details-marker]:hidden">
                   <span className="flex items-center justify-between gap-4">
                     {item.question}
                     <span
@@ -266,7 +262,7 @@ export default function RootAndRisePage() {
                     </span>
                   </span>
                 </summary>
-                <p className="mt-3 text-paper/80">{item.answer}</p>
+                <p className="mt-3 text-navy/75">{item.answer}</p>
               </details>
             ))}
           </div>

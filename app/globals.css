@@ -1,34 +1,36 @@
 @import "tailwindcss";
 
-/* Spark Life Collective brand kit
-   FAITH #023550 · BELIEF #EEEEE9 · DEVOTION #768779 · CONNECTION #CC9752
-   EXPLORATION #857EA2 · EMPOWERMENT #E4CB8A · EXPRESSION #8CA2BD · STABILITY #9B3636
-   Type: Vincentia/Holla (script) · Black Mango (headers) · Agrandir Tight (body)
-   Closest licensed-web stand-ins until official files are supplied:
-   Yellowtail (Holla) · Cinzel (Black Mango / art-deco caps) · Outfit (Agrandir Tight)
+/*
+  Spark Life Collective theme
+  Swap licensed files in later by pointing these families at local @font-face:
+    --font-mango     → Black Mango (Regular / Bold)
+    --font-narrow    → Agrandir Narrow
+    --font-script    → Holla or Vincentia
+    --font-sans      → Agrandir (body)
+  Current web fallbacks: Playfair Display, Barlow Condensed, Yellowtail, Outfit.
 */
 @theme inline {
   --color-navy: #023550;
   --color-navy-deep: #01253a;
-  --color-paper: #EEEEE9;
-  --color-sage: #768779;
+  --color-paper: #eeeee9;
   --color-gold: #cc9752;
   --color-gold-light: #e4cb8a;
+  --color-sage: #768779;
   --color-violet: #857ea2;
   --color-dusk: #8ca2bd;
   --color-clay: #9b3636;
-  --color-primary: var(--color-navy);
-  --color-primary-dark: var(--color-navy-deep);
   --color-ink: #023550;
-  --color-background: var(--color-navy);
-  --color-foreground: var(--color-paper);
-  --font-script: var(--font-holla), "Segoe Script", cursive;
-  --font-serif: var(--font-mango), "Palatino Linotype", Palatino, serif;
-  --font-sans: var(--font-agrandir), "Segoe UI", sans-serif;
+  --color-background: var(--color-paper);
+  --color-foreground: var(--color-navy);
+  --font-mango: "Black Mango", var(--font-display), Georgia, "Times New Roman", serif;
+  --font-narrow: "Agrandir Narrow", var(--font-condensed), "Arial Narrow", sans-serif;
+  --font-script: "Holla", "Vincentia", var(--font-holla), "Segoe Script", cursive;
+  --font-sans: "Agrandir", var(--font-agrandir), "Segoe UI", sans-serif;
+  --font-serif: var(--font-mango);
 }
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html {
@@ -36,16 +38,15 @@ html {
 }
 
 body {
-  background: var(--color-navy);
-  color: var(--color-paper);
+  background: var(--color-paper);
+  color: var(--color-navy);
   font-family: var(--font-sans);
   font-size: 1.0625rem;
-  letter-spacing: -0.01em;
   line-height: 1.7;
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--color-gold-light) 80%, white);
+  background: color-mix(in srgb, var(--color-gold) 35%, white);
   color: var(--color-navy);
 }
 
@@ -59,7 +60,7 @@ body {
   left: 1rem;
   top: -5rem;
   z-index: 80;
-  border-radius: 0.25rem;
+  border-radius: 999px;
   background: var(--color-navy);
   color: var(--color-paper);
   padding: 0.5rem 1rem;
@@ -71,26 +72,77 @@ body {
   top: 1rem;
 }
 
-.eyebrow {
+.font-mango {
+  font-family: var(--font-mango);
+}
+
+.font-narrow {
+  font-family: var(--font-narrow);
+}
+
+.font-script {
   font-family: var(--font-script);
-  font-size: 1.65rem;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  line-height: 1.2;
-  text-transform: none;
 }
 
-.sunburst {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%23CC9752' stroke-opacity='0.22' stroke-width='1'%3E%3Cline x1='400' y1='400' x2='400' y2='0'/%3E%3Cline x1='400' y1='400' x2='400' y2='800'/%3E%3Cline x1='400' y1='400' x2='0' y2='400'/%3E%3Cline x1='400' y1='400' x2='800' y2='400'/%3E%3Cline x1='400' y1='400' x2='683' y2='117'/%3E%3Cline x1='400' y1='400' x2='117' y2='683'/%3E%3Cline x1='400' y1='400' x2='683' y2='683'/%3E%3Cline x1='400' y1='400' x2='117' y2='117'/%3E%3Cline x1='400' y1='400' x2='600' y2='54'/%3E%3Cline x1='400' y1='400' x2='200' y2='746'/%3E%3Cline x1='400' y1='400' x2='746' y2='200'/%3E%3Cline x1='400' y1='400' x2='54' y2='600'/%3E%3Cline x1='400' y1='400' x2='746' y2='600'/%3E%3Cline x1='400' y1='400' x2='54' y2='200'/%3E%3Cline x1='400' y1='400' x2='600' y2='746'/%3E%3Cline x1='400' y1='400' x2='200' y2='54'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 58rem 58rem;
-  background-repeat: no-repeat;
+.kicker,
+.eyebrow {
+  font-family: var(--font-narrow);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
 }
 
-.paper-panel {
-  background: var(--color-paper);
+.btn-gold {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--color-gold);
+  padding: 0.6rem 1.5rem;
+  font-family: var(--font-narrow);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fff;
+  transition: background 0.15s ease;
+}
+
+.btn-gold:hover {
+  background: #b88745;
+}
+
+.btn-outline {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid var(--color-navy);
+  background: transparent;
+  padding: 0.6rem 1.5rem;
+  font-family: var(--font-narrow);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   color: var(--color-navy);
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
-.prose-slc p + p {
-  margin-top: 1rem;
+.btn-outline:hover {
+  background: var(--color-navy);
+  color: var(--color-paper);
+}
+
+.btn-outline-light {
+  border-color: rgba(238, 238, 233, 0.85);
+  color: var(--color-paper);
+}
+
+.btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
 }

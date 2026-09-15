@@ -7,11 +7,11 @@ export function RegistrationEmbed() {
   return (
     <div id="jotform-root-and-rise" data-swap-point="JOTFORM EMBED: Root & Rise registration">
       {/* JOTFORM EMBED: Root & Rise registration */}
-      <p className="mb-4 text-sm text-paper/70">
+      <p className="mb-4 text-sm text-navy/70">
         Prefer a full page?{" "}
         <a
           href={src || rootAndRise.registerUrl}
-          className="font-semibold text-gold-light underline decoration-gold underline-offset-4"
+          className="font-semibold text-navy underline decoration-gold underline-offset-4"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -19,7 +19,7 @@ export function RegistrationEmbed() {
         </a>
         .
       </p>
-      <div className="paper-panel overflow-hidden rounded-sm border border-gold/25">
+      <div className="overflow-hidden rounded-sm border border-navy/10 bg-white">
         <iframe
           title="Root & Rise registration"
           src={src}

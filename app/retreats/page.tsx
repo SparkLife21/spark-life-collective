@@ -27,15 +27,15 @@ export default function RetreatsPage() {
           </p>
         </PageIntro>
 
-        <article className="mx-auto mt-14 max-w-4xl overflow-hidden rounded-sm border border-gold/25 bg-navy-deep">
+        <article className="mx-auto mt-14 max-w-4xl overflow-hidden rounded-sm bg-navy text-paper">
           <div className="grid gap-0 md:grid-cols-[1.3fr_0.7fr]">
             <div className="px-6 py-8 sm:px-10">
               <p className="eyebrow text-gold-light">Now gathering</p>
-              <h2 className="mt-3 font-serif text-3xl font-normal text-paper">
+              <h2 className="mt-3 font-serif text-3xl font-normal">
                 {rootAndRise.name}
               </h2>
               <p className="mt-3 text-lg text-paper/75">{rootAndRise.theme}</p>
-              <p className="mt-5 text-sm font-semibold text-gold">
+              <p className="mt-5 text-sm font-semibold text-gold-light">
                 {rootAndRise.datesLabel} · {rootAndRise.timeEt}
               </p>
               <p className="mt-1 text-sm text-paper/70">
@@ -47,7 +47,7 @@ export default function RetreatsPage() {
                 </ButtonLink>
               </div>
             </div>
-            <div className="relative min-h-56 bg-navy">
+            <div className="relative min-h-56">
               <RetreatFlyer
                 className="h-full max-h-80 object-cover object-top md:absolute md:inset-0 md:max-h-none"
                 sizes="(max-width: 768px) 100vw, 40vw"
@@ -57,12 +57,12 @@ export default function RetreatsPage() {
         </article>
       </Section>
 
-      <Section className="pt-0">
+      <Section className="bg-white pt-0">
         <div className="mx-auto max-w-6xl">
-          <h2 className="font-serif text-3xl font-normal text-paper">
+          <h2 className="font-serif text-3xl font-normal text-navy">
             Exploratory / coming
           </h2>
-          <p className="mt-3 max-w-2xl text-paper/75">
+          <p className="mt-3 max-w-2xl text-navy/70">
             A broader set of retreats SLC can draw from. Only Root &amp; Rise is
             currently scheduled. The rest are conceptual — no dates, no prices,
             no registration.
@@ -71,21 +71,21 @@ export default function RetreatsPage() {
             {retreatConcepts.map((retreat) => (
               <li
                 key={retreat.name}
-                className="flex flex-col rounded-sm border border-gold/20 bg-navy-deep p-5"
+                className="flex flex-col rounded-sm border border-navy/10 bg-paper p-5"
               >
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-gold">
+                <p className="kicker text-gold">
                   {retreat.scheduled ? "Gathering now" : "Exploratory"}
                 </p>
-                <h3 className="mt-2 font-serif text-xl font-normal text-paper">
+                <h3 className="mt-2 font-serif text-xl font-normal text-navy">
                   {retreat.href ? (
-                    <Link href={retreat.href} className="hover:text-gold-light">
+                    <Link href={retreat.href} className="hover:text-gold">
                       {retreat.name}
                     </Link>
                   ) : (
                     retreat.name
                   )}
                 </h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-paper/75">
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-navy/70">
                   {retreat.theme}
                 </p>
               </li>
@@ -94,12 +94,12 @@ export default function RetreatsPage() {
         </div>
       </Section>
 
-      <Section className="border-t border-gold/20">
+      <Section className="border-t border-navy/8">
         <div className="mx-auto max-w-xl">
-          <h2 className="font-serif text-2xl font-normal text-paper">
+          <h2 className="font-serif text-2xl font-normal text-navy">
             Retreat updates
           </h2>
-          <p className="mt-2 text-sm text-paper/70">
+          <p className="mt-2 text-sm text-navy/60">
             Stay informed without registering for a specific gathering.
           </p>
           <div className="mt-6">

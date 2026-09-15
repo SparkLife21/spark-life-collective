@@ -10,7 +10,7 @@ type LogoProps = {
 
 export function Logo({
   className,
-  variant = "light",
+  variant = "navy",
   priority = false,
 }: LogoProps) {
   const src =
@@ -25,7 +25,7 @@ export function Logo({
       width={1600}
       height={963}
       priority={priority}
-      className={cn("h-16 w-auto sm:h-[4.75rem]", className)}
+      className={cn("h-14 w-auto sm:h-16", className)}
     />
   );
 }

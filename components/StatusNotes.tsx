@@ -7,7 +7,7 @@ type NoteProps = {
 };
 
 /** Visible marker for copy that has not been approved. */
-export function DraftNote({ children, className, tone = "dark" }: NoteProps) {
+export function DraftNote({ children, className, tone = "light" }: NoteProps) {
   const dark = tone === "dark";
   return (
     <figure className={cn("relative", className)}>
@@ -33,6 +33,6 @@ export function DraftNote({ children, className, tone = "dark" }: NoteProps) {
 
 export function ConfirmNote({ children, className }: NoteProps) {
   return (
-    <span className={cn("italic text-gold-light/85", className)}>{children}</span>
+    <span className={cn("italic text-sage", className)}>{children}</span>
   );
 }
