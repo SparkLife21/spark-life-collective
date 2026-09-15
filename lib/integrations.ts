@@ -16,9 +16,12 @@ export function jotformRootAndRiseUrl() {
   );
 }
 
+const DEFAULT_DONATE_URL =
+  "https://givebutter.com/spark-life-collective-donations";
+
 export function donateUrl() {
-  // DONATE EMBED: [Givebutter/Donorbox/PayPal Giving Fund — confirm platform]
-  return process.env.NEXT_PUBLIC_DONATE_URL?.trim() || "";
+  // DONATE EMBED: Givebutter
+  return process.env.NEXT_PUBLIC_DONATE_URL?.trim() || DEFAULT_DONATE_URL;
 }
 
 export function newsletterActionUrl() {
