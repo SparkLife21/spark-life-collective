@@ -2,7 +2,7 @@
 
 Public website for **Spark Life Collective (SLC)** — a 501(c)(3) nonprofit ministry, established 2024. SLC is a separate legal entity from Spark Life (SparkLifeToday.com).
 
-Stack: **Next.js (App Router) + TypeScript + Tailwind CSS**. Deploy on Vercel.
+Stack: **Next.js (App Router) + TypeScript + Tailwind CSS**. The production build is a **static export**. GitHub Actions uploads it to **IONOS regular web hosting** (`/collective`) over SFTP — no Node server on IONOS.
 
 ## Local development
 
@@ -13,6 +13,40 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
+
+## Deploy: GitHub → IONOS
+
+IONOS serves the static files. It cannot run `next start`. GitHub builds the site and uploads **`out/`** over SFTP into webspace folder **`/collective`**.
+
+### 1. Connect GitHub to IONOS
+
+In the repo: **Settings → Secrets and variables → Actions**.
+
+Secrets (from IONOS → Hosting → SFTP & SSH — the account for `/collective`):
+
+| Secret | Value |
+| --- | --- |
+| `IONOS_SFTP_HOST` | Host such as `access….webspace-data.io` |
+| `IONOS_SFTP_USER` | SFTP username |
+| `IONOS_SFTP_PASSWORD` | SFTP password |
+
+Variables:
+
+| Variable | Value |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Live URL, e.g. `https://your-domain.com` |
+
+Leave `IONOS_SFTP_REMOTE_DIR` unset so uploads go to `collective`. If this SFTP user is already locked to `/collective`, set that variable to `.`.
+
+### 2. Ship
+
+Merge to **`main`**, or run **Actions → Deploy to IONOS → Run workflow**. GitHub runs `npm run build` and uploads the files, including `.htaccess`.
+
+### 3. Point the domain at `/collective`
+
+In IONOS: **Domains** → connect the domain to webspace directory **`/collective`**, then turn on SSL. Visit the domain — `/about/` and other routes should load without a Node process.
+
+If a path 404s, confirm `.htaccess` is in `/collective` and that Apache `mod_rewrite` is on (it usually is).
 
 ## Homepage
 

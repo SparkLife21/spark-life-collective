@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "preview": "npx --yes serve out",
+    "deploy:ionos": "bash scripts/deploy-ionos.sh",
     "start": "next start",
     "lint": "eslint"
   },
