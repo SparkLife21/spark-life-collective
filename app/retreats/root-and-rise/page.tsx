@@ -113,7 +113,15 @@ export default function RootAndRisePage() {
           {[
             { label: "Format", value: rootAndRise.format },
             { label: "Dates", value: rootAndRise.datesLabel },
-            { label: "Time", value: rootAndRise.timeLabel },
+            {
+              label: "Time",
+              lines: [
+                "1:00 PM ET",
+                "12:00 PM CT",
+                "11:00 AM MT",
+                "10:00 AM PT",
+              ],
+            },
             {
               label: "Cost",
               value: rootAndRise.cost,
@@ -123,12 +131,18 @@ export default function RootAndRisePage() {
             <div key={item.label} className="border-t border-ink/15 pt-4">
               <dt className="eyebrow text-primary">{item.label}</dt>
               <dd className="mt-2 text-sm leading-relaxed text-ink/85">
-                {"href" in item && item.href ? (
+                {"lines" in item && item.lines ? (
+                  <ul className="space-y-1">
+                    {item.lines.map((line) => (
+                      <li key={line}>{line}</li>
+                    ))}
+                  </ul>
+                ) : "href" in item && item.href ? (
                   <a href={item.href} className="underline decoration-gold underline-offset-4">
                     {item.value}
                   </a>
                 ) : (
-                  item.value
+                  "value" in item && item.value
                 )}
               </dd>
             </div>

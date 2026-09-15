@@ -9,7 +9,7 @@ export function HorizonScene() {
       focusable="false"
     >
       <defs>
-        <radialGradient id="sun" cx="50%" cy="72%" r="38%">
+        <radialGradient id="sun" cx="50%" cy="58%" r="42%">
           <stop offset="0%" stopColor="#E4CB8A" stopOpacity="0.95" />
           <stop offset="35%" stopColor="#CC9752" stopOpacity="0.55" />
           <stop offset="100%" stopColor="#9B3636" stopOpacity="0" />
@@ -24,7 +24,7 @@ export function HorizonScene() {
         </linearGradient>
       </defs>
       <rect width="1440" height="820" fill="#14110f" />
-      <circle cx="720" cy="560" r="280" fill="url(#sun)" />
+      <circle cx="720" cy="430" r="300" fill="url(#sun)" />
       <path
         d="M0 548c120-28 240-48 360-42 150 8 240 52 390 48 160-4 250-50 400-58 110-6 210 10 290 28v296H0V548Z"
         fill="url(#land)"
