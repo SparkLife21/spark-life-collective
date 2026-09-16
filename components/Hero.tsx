@@ -56,8 +56,9 @@ export function Hero() {
       <div className="relative mx-auto flex w-full max-w-6xl items-center px-4 sm:px-6">
         <div className="relative z-[32] w-full bg-paper py-12 sm:py-16 lg:min-h-[32.5rem] lg:w-[52%] lg:rounded-r-[2.75rem] lg:py-16 lg:pr-12">
           <h1 className="font-mango text-[2.55rem] font-bold leading-[1.05] tracking-tight text-navy sm:text-5xl lg:text-[3.55rem]">
-            <span className="block">Faith Fuels</span>
-            <span className="block">Brighter Tomorrows</span>
+            <span className="block">Where Christ</span>
+            <span className="block">Forms Leaders.</span>
+            <span className="block">Together.</span>
           </h1>
           <span className="mt-6 block h-px w-14 bg-gold" aria-hidden="true" />
           <p className="mt-6 max-w-md text-[1.05rem] leading-relaxed text-navy/75">
