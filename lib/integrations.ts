@@ -4,6 +4,7 @@
  * When Spark Life shares real values, set them in `.env.local` (see `.env.example`).
  * Components read these helpers and render the live embed/link instead of the placeholder.
  */
+import { CONTACT_EMAIL } from "@/lib/site";
 
 const DEFAULT_JOTFORM_ROOT_AND_RISE =
   "https://form.jotform.com/sparklife21/slc-retreat-root-rise";
@@ -30,8 +31,7 @@ export function newsletterActionUrl() {
 }
 
 export function contactEmail() {
-  // OPEN DECISION: which inbox should /contact go to
-  return process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || "";
+  return process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || CONTACT_EMAIL;
 }
 
 export function socialLinks(): Array<{ label: string; href: string }> {
