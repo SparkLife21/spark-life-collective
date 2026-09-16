@@ -41,8 +41,9 @@ img{display:block}
 .tile-body{padding:13px 15px 16px;display:flex;flex-direction:column;flex:1}
 .tile-body h2{font-family:BlackMango,Georgia,serif;font-size:20px;line-height:1.05;font-weight:400;margin:0 0 5px}
 .aspects{font-size:8px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 7px}
-.aspects.tbd{color:rgba(2,53,80,.42)}
-.tile-body p.blurb{font-size:11px;line-height:1.45;margin:0 0 11px;flex:1}
+.tile-body p.blurb{font-size:11px;line-height:1.45;margin:0 0 9px;flex:1}
+.scripture{display:flex;align-items:center;gap:7px;font-size:8px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(2,53,80,.55);margin:0 0 11px}
+.scripture:before{content:"";width:15px;height:1px;background:var(--gold);flex:none}
 .tile-meta{display:flex;align-items:center;flex-wrap:wrap;gap:9px}
 .when{font-size:8px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(2,53,80,.6)}
 .when.live{color:var(--navy)}
@@ -101,7 +102,9 @@ footer .brand-logo{height:32px}
   .tile-body{padding:20px 22px 24px}
   .tile-body h2{font-size:27px;margin-bottom:8px}
   .aspects{font-size:10px;margin-bottom:11px}
-  .tile-body p.blurb{font-size:14px;line-height:1.5;margin-bottom:18px}
+  .tile-body p.blurb{font-size:14px;line-height:1.5;margin-bottom:14px}
+  .scripture{font-size:10px;margin-bottom:18px;gap:9px}
+  .scripture:before{width:20px}
   .when{font-size:10px}
   .tile-cta{height:34px;padding:0 16px;font-size:9px}
   .ribbon{width:140px;height:140px}
