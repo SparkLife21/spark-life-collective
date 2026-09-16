@@ -85,61 +85,87 @@ export const rootAndRise = {
   ],
 } as const;
 
+/**
+ * Retreat catalog as supplied by Spark Life: aspects covered, theme, scripture.
+ * The live listing at /retreats/ is homepage/retreats/index.html — keep both in step.
+ */
 export const retreatConcepts: Array<{
   name: string;
+  aspects: string[];
   theme: string;
+  scripture: string;
   href?: string;
   scheduled: boolean;
 }> = [
   {
     name: "Root & Rise",
+    aspects: ["Spirituality", "Adversity"],
     theme: "Anchored faith through hardship. A sacred reset.",
+    scripture: "James 1:2–4",
     href: "/retreats/root-and-rise",
     scheduled: true,
   },
   {
     name: "Seek & Secure",
+    aspects: ["Curiosity", "Intimacy"],
     theme: "From spiritual wonder to relational trust.",
+    scripture: "John 1:38–39",
     scheduled: false,
   },
   {
     name: "Share, Support & Strengthen",
+    aspects: ["Communication", "Accountability", "Relationships"],
     theme: "Speaking honestly, showing up with integrity, growing together.",
+    scripture: "Ephesians 4:2–3",
     scheduled: false,
   },
   {
     name: "Stand & Shine",
+    aspects: ["Individuality", "Appearance"],
     theme: "Showing up fully, inside and out.",
+    scripture: "Matthew 5:14–16",
     scheduled: false,
   },
   {
     name: "Flex & Flow",
+    aspects: ["Adaptability", "Play"],
     theme: "Rediscovering joy through presence, silliness, emotional flexibility.",
+    scripture: "Psalm 118:24",
     scheduled: false,
   },
   {
     name: "Design & Deliver",
+    aspects: ["Creativity", "Career"],
     theme: "Turning vision into meaningful work.",
+    scripture: "Exodus 35:31–33",
     scheduled: false,
   },
   {
     name: "Presence & Purpose",
+    aspects: ["Reputation", "Influence"],
     theme: "Using your voice and name to reflect truth and goodness.",
+    scripture: "Proverbs 22:1–2",
     scheduled: false,
   },
   {
     name: "Rest & Renew",
+    aspects: ["Comfort", "Health"],
     theme: "A return to wholeness through peace and restoration.",
+    scripture: "Psalm 23:1–4",
     scheduled: false,
   },
   {
     name: "Plan & Pursue",
+    aspects: ["Organization", "Dreaming"],
     theme: "Giving form to vision. Structure with spirit.",
+    scripture: "Proverbs 19:21",
     scheduled: false,
   },
   {
     name: "Supply & Soar",
+    aspects: ["Wealth", "Adventure"],
     theme: "Resourcing a life of bold exploration and trust.",
+    scripture: "Ecclesiastes 5:18–20",
     scheduled: false,
   },
 ];
