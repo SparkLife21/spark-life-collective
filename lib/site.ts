@@ -34,22 +34,22 @@ export function getSiteUrl() {
   return process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || site.defaultUrl;
 }
 
+export const CONTACT_EMAIL = "inquire@sparklifecollective.org";
+
+// Partner, Resources, and Get Involved are hidden until those pages exist.
+// Connect goes straight to the inquiry inbox, matching the static pages.
 export const nav = {
   primary: [
     { href: "/about", label: "About" },
     { href: "/retreats", label: "Retreats" },
     { href: "/programs", label: "Programs" },
-    { href: "/partner", label: "Partner" },
-    { href: "/resources", label: "Resources" },
-    { href: "/get-involved", label: "Get Involved" },
+    { href: `mailto:${CONTACT_EMAIL}`, label: "Connect" },
   ],
   footer: [
     { href: "/about", label: "About" },
     { href: "/retreats", label: "Retreats" },
     { href: "/programs", label: "Programs" },
-    { href: "/partner", label: "Partner" },
-    { href: "/resources", label: "Resources" },
-    { href: "/contact", label: "Contact" },
+    { href: `mailto:${CONTACT_EMAIL}`, label: "Connect" },
   ],
 } as const;
 
