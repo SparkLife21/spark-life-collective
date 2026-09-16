@@ -5,13 +5,13 @@
 @font-face{font-family:Agrandir;src:local("Agrandir Narrow"),local("Agrandir-Narrow");font-display:swap}
 @font-face{font-family:Vincentia;src:local("Vincentia"),local("Holla");font-display:swap}
 
-:root{--navy:#023550;--gold:#cc9752;--cream:#eeeee9;--paper:#f7f6f1;--red:#9b3636;--orange:#cc9752;--yellow:#e4cb8a;--green:#768779;--blue:#8ca2bd;--purple:#857ea2}
+:root{--navy:#023550;--gold:#cc9752;--cream:#eeeee9;--paper:#eeeee9;--red:#9b3636;--orange:#cc9752;--yellow:#e4cb8a;--green:#768779;--blue:#8ca2bd;--purple:#857ea2}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;background:#f3f4f1}
-body{margin:0;color:var(--navy);font-family:Agrandir,"Arial Narrow",Arial,sans-serif;background:radial-gradient(circle at 50% 0,#fff 0,#f4f5f2 66%,#eceeeb 100%);font-size:14px}
+html{scroll-behavior:smooth;background:#eeeee9}
+body{margin:0;color:var(--navy);font-family:Agrandir,"Arial Narrow",Arial,sans-serif;background:#eeeee9;font-size:14px}
 a{color:inherit;text-decoration:none}
 img{display:block}
-.page{width:min(100%,1136px);margin:0 auto;background:var(--paper);box-shadow:0 0 55px rgba(2,53,80,.08);overflow:hidden}
+.page{width:min(100%,1136px);margin:0 auto;background:var(--paper);overflow:hidden}
 .label{font-size:8px;line-height:1.2;font-weight:800;letter-spacing:.29em;text-transform:uppercase}
 .brand{display:flex;align-items:center;gap:9px;color:var(--navy)}
 .brand-logo{height:40px;width:auto;flex:none}
@@ -26,7 +26,7 @@ img{display:block}
 .btn.gold{background:linear-gradient(180deg,#d19b59,#b97535);border-color:#b97535;color:#fff}
 
 /* Page intro */
-.page-head{padding:34px 24px 26px;text-align:center;background:radial-gradient(circle at 50% 20%,#fff 0,#f8f7f2 60%,#f2f1eb 100%)}
+.page-head{padding:34px 24px 26px;text-align:center;background:#eeeee9}
 .title-row{display:flex;justify-content:center;align-items:center;gap:9px}
 .title-row:before,.title-row:after{content:"";width:44px;height:1px;background:var(--gold)}
 .page-head h1{font-family:BlackMango,Georgia,serif;font-size:34px;line-height:1.02;font-weight:700;letter-spacing:-.03em;margin:9px 0 10px}
@@ -63,7 +63,7 @@ img{display:block}
 .group ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:5px 7px}
 .group li{font-size:10px;line-height:1.2;padding:3px 8px;border-radius:999px;background:rgba(2,53,80,.05)}
 .group p{font-size:11px;line-height:1.45;margin:7px 0 0}
-.steps{background:linear-gradient(180deg,#f8f8f4,#f0f0ea);padding:32px 24px 36px}
+.steps{background:#eeeee9;padding:32px 24px 36px}
 .steps-inner{max-width:1000px;margin:0 auto}
 .steps h2{font-family:BlackMango,Georgia,serif;font-size:26px;line-height:1.05;text-align:center;margin:9px 0 24px;font-weight:400}
 .step-grid{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
@@ -81,7 +81,7 @@ img{display:block}
 .closing .btn.gold{border-color:#b97535;color:#fff}
 .closing-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:11px}
 
-footer{display:grid;grid-template-columns:220px 1fr 220px;align-items:center;padding:20px 37px;background:#fbfbf8;gap:16px}
+footer{display:grid;grid-template-columns:220px 1fr 220px;align-items:center;padding:20px 37px;background:#eeeee9;gap:16px}
 footer .brand-logo{height:32px}
 .footer-links{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;font-size:7px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
 .footer-right{font-size:7px;font-weight:800;letter-spacing:.2em;text-align:right;text-transform:uppercase}
