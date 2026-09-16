@@ -58,7 +58,7 @@ The homepage is hand-authored static HTML, not a React page:
 
 `npm run dev` still renders the older React homepage at `/`. To preview what actually ships, run `npm run build && npm run preview`.
 
-Icons come from `app/icon.png`, `app/apple-icon.png`, and `public/favicon.ico` (16/32/48/64) — all the cream tile with the gold flame.
+Icons are the supplied gold flame (`public/images/favicon-flame.png`), resized only into `app/favicon.ico` / `public/favicon.ico` (16–256), `app/icon.png` / `public/icon.png` (512), and `app/apple-icon.png` / `public/apple-icon.png` (180).
 
 ## Fonts
 
