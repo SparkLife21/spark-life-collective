@@ -48,7 +48,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Spark Life"
-            className="inline-block"
+            className="inline-block rounded bg-navy px-3.5 py-3"
           >
             <img
               src={SPARK_LIFE_LOGO}
