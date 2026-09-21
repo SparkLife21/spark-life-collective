@@ -30,12 +30,12 @@ export function Header() {
 
   return (
     <header className="relative sticky top-0 z-40 border-b border-navy/8 bg-paper/95 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <Link href="/" className="shrink-0" aria-label={`${site.name} home`}>
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6 xl:grid xl:grid-cols-[1fr_auto_1fr]">
+        <Link href="/" className="shrink-0 justify-self-start" aria-label={`${site.name} home`}>
           <Logo variant="navy" priority className="h-10 sm:h-11" />
         </Link>
 
-        <nav className="hidden items-center gap-5 xl:flex" aria-label="Primary">
+        <nav className="hidden items-center justify-center gap-5 xl:flex" aria-label="Primary">
           {nav.primary.map((item) => (
             <Link
               key={item.href}
@@ -50,7 +50,7 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 xl:flex">
+        <div className="hidden items-center justify-self-end gap-3 xl:flex">
           <Link href="/give" className="btn-gold min-h-9 px-5">
             Donate
           </Link>
@@ -63,7 +63,7 @@ export function Header() {
           </button>
         </div>
 
-        <details ref={detailsRef} className="group xl:hidden">
+        <details ref={detailsRef} className="group justify-self-end xl:hidden">
           <summary className="block cursor-pointer list-none marker:content-none [&::-webkit-details-marker]:hidden">
             <span className="inline-flex min-h-10 min-w-10 items-center justify-center rounded-full border border-navy/20">
               <span className="sr-only">Menu</span>
