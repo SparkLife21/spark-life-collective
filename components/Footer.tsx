@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
-import { nav, site, social, SPARK_LIFE_LOGO, SPARK_LIFE_URL } from "@/lib/site";
+import { nav, site, social } from "@/lib/site";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -13,12 +13,23 @@ export function Footer() {
         </Link>
 
         <nav aria-label="Footer">
-          <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
+          <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
             {nav.footer.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="kicker text-navy/65 hover:text-navy">
-                  {item.label}
-                </Link>
+                {item.href.startsWith("http") ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="kicker text-navy/65 hover:text-navy"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link href={item.href} className="kicker text-navy/65 hover:text-navy">
+                    {item.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
@@ -42,26 +53,9 @@ export function Footer() {
           ))}
         </ul>
 
-        <div className="flex flex-col items-start gap-3 lg:items-end">
-          <a
-            href={SPARK_LIFE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Spark Life"
-            className="inline-block rounded bg-navy px-3.5 py-3"
-          >
-            <img
-              src={SPARK_LIFE_LOGO}
-              alt="Spark Life"
-              width={120}
-              height={56}
-              className="h-auto w-[1.25in]"
-            />
-          </a>
-          <p className="kicker max-w-[9rem] leading-relaxed text-navy/55 lg:text-right">
-            A brighter tomorrow, together.
-          </p>
-        </div>
+        <p className="kicker max-w-[9rem] leading-relaxed text-navy/55 lg:text-right">
+          A brighter tomorrow, together.
+        </p>
       </div>
       <div className="border-t border-navy/8">
         <p className="mx-auto max-w-6xl px-4 py-4 text-xs text-navy/45 sm:px-6">
