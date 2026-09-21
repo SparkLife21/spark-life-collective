@@ -37,6 +37,10 @@ export function getSiteUrl() {
 
 export const CONTACT_EMAIL = "inquire@sparklifecollective.org";
 
+// Commercial Spark Life site. Link only — do not invent a legal relationship.
+export const SPARK_LIFE_URL = "https://www.sparklifetoday.com/";
+export const SPARK_LIFE_LOGO = "/images/spark-life-logo.png";
+
 export const social = [
   {
     href: "https://www.instagram.com/sparklifecollective/",
