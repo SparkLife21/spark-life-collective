@@ -146,7 +146,7 @@ footer .brand-logo{height:32px}
 .social a{display:grid;place-items:center;width:28px;height:28px;color:var(--navy)}
 .social svg{width:15px;height:15px;fill:currentColor;display:block}
 .footer-end{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
-.spark-life{display:inline-block;background:#023550;padding:7px 11px 8px;border-radius:4px}
+.spark-life{display:inline-block}
 .spark-life-logo{display:block;width:108px;height:auto}
 
 @media(max-width:900px){
