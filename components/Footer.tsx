@@ -53,9 +53,9 @@ export function Footer() {
             <img
               src={SPARK_LIFE_LOGO}
               alt="Spark Life"
-              width={108}
-              height={51}
-              className="h-auto w-[108px]"
+              width={120}
+              height={56}
+              className="h-auto w-[1.25in]"
             />
           </a>
           <p className="kicker max-w-[9rem] leading-relaxed text-navy/55 lg:text-right">
